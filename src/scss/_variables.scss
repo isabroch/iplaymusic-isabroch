@@ -1,3 +1,4 @@
+// colors
 $color-primary: #FF1168;
 $color-secondary-dark: #341931;
 $color-secondary-light: #FFFFFF;
@@ -13,7 +14,61 @@ $color-menu-7: #0ABEBE;
 $color-menu-8: #00A1CB;
 $color-menu-9: #115793;
 
-$gradient-red:    #EE0979, #FF6A00;
-$gradient-blue:   #00A1CB, #115793;
-$gradient-green:  #5EB11C, #3A7634;
-$gradient-black:  #00000000, #111111;
+$gradient-red: #EE0979,
+#FF6A00;
+$gradient-blue: #00A1CB,
+#115793;
+$gradient-green: #5EB11C,
+#3A7634;
+$gradient-black: #00000000,
+#111111;
+
+// typography
+@mixin font($size) {
+  line-height: 1.5;
+
+  @if $size==h1 {
+    font-size: 3rem;
+    font-weight: 700;
+  }
+
+  @if $size==h2 {
+    font-size: 2.25rem;
+    font-weight: 700;
+  }
+
+  @if $size==h3 {
+    font-size: 2rem;
+    font-weight: 700;
+  }
+
+  @if $size==h4 {
+    font-size: 1.5rem;
+    font-weight: 700;
+  }
+
+  @if $size==h5 {
+    font-size: 1.25rem;
+    font-weight: 700;
+  }
+
+  @if $size==h6 {
+    font-size: 0.9375rem;
+    font-weight: 700;
+  }
+
+  @if $size==m {
+    font-size: 0.9375rem;
+    font-weight: 300;
+  }
+
+  @if $size==s {
+    font-size: 0.75rem;
+    font-weight: 300;
+  }
+
+  @if $size==xs {
+    font-size: 0.625rem;
+    font-weight: 300;
+  }
+}
