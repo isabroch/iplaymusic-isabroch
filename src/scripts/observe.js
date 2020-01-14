@@ -26,7 +26,7 @@ const observe = (
   cb = function(el) {
     console.log(`${el} has been spotted, and is doing nothing!`)
   },
-  firesOnce,
+  firesOnce = true,
   rootMargin = '0px 0px 50% 0px',
   threshold = 0
 ) => {
