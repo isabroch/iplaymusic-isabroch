@@ -1,4 +1,5 @@
 .header {
   @include gradientClip();
-  @include typography(h1);
+  @include typography(h2);
+  margin-bottom: 0.5rem;
 }
