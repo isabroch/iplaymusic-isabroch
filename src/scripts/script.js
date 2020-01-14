@@ -1,29 +1,11 @@
-/* Switching color mode between light and dark */
-function colorMode(toggle = false) {
-  let mode = localStorage.getItem('colorMode');
+import toggleColorMode from "./toggleColorMode.js";
+import lazyLoad from "./lazyLoad.js"
 
-  if (!mode) {
-    mode = 'dark'
-  };
+toggleColorMode;
 
-  if (toggle) {
-    switch (mode) {
-      case 'dark':
-        mode = 'light';
-        break;
-
-      case 'light':
-        mode = 'dark';
-        break;
-    }
+lazyLoad(
+  '.lazyLoad-background',
+  function(el) {
+    el.style = `--card-bg: url(${el.dataset.image})`;
   }
-
-  localStorage.setItem('colorMode', mode)
-  document.querySelector('body').classList = `_${mode}`;
-}
-
-colorMode(false);
-
-document.querySelector('.js-toggle-colormode').addEventListener('click', () => {
-  colorMode(true);
-})
+);
