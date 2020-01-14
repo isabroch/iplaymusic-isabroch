@@ -1,6 +1,10 @@
 /* Switching color mode between light and dark */
 
-const colorMode = ( () => {
+/**
+ *
+ * @param {string} selector - The CSS selector for the elements that are targeted, as a string.
+ */
+const colorMode = (selector) => {
   function colorMode(toggle = false) {
     let mode = localStorage.getItem('colorMode');
 
@@ -26,11 +30,11 @@ const colorMode = ( () => {
     return mode;
   }
 
-  document.querySelector('.js-toggle-colormode').addEventListener('click', () => {
+  document.querySelector(selector).addEventListener('click', () => {
     colorMode(true);
   })
 
   return colorMode(false);
-} )();
+}
 
 export default colorMode;
