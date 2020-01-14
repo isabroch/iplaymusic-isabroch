@@ -1,0 +1,4 @@
+.header {
+  @include gradientClip();
+  @include typography(h1);
+}

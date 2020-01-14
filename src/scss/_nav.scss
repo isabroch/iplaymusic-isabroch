@@ -17,6 +17,8 @@
     padding: 15px 5px;
     list-style: none;
     align-items: center;
+    left: 0;
+    right: 0;
 
     &_top {
       color: var(--color-text);
@@ -41,8 +43,7 @@
 
     &__link {
       cursor: pointer;
-      background: linear-gradient(to right, $gradient-red);
-      background-clip: text;
+      @include gradientClip();
       color: transparent;
       border: none;
       display: block;
@@ -82,8 +83,7 @@
 
         &.navbar__link_highlight {
           i {
-            background: linear-gradient(to right, $gradient-red);
-            background-clip: text;
+            @include gradientClip();
           }
 
           &::before {

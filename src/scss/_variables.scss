@@ -28,31 +28,26 @@ $gradient-black: #00000000,
   line-height: 1.5;
 
   @if $size==h1 {
-    font-size: 3rem;
-    font-weight: 700;
-  }
-
-  @if $size==h2 {
     font-size: 2.25rem;
     font-weight: 700;
   }
 
-  @if $size==h3 {
+  @if $size==h2 {
     font-size: 2rem;
     font-weight: 700;
   }
 
-  @if $size==h4 {
+  @if $size==h3 {
     font-size: 1.5rem;
     font-weight: 700;
   }
 
-  @if $size==h5 {
+  @if $size==h4 {
     font-size: 1.25rem;
     font-weight: 700;
   }
 
-  @if $size==h6 {
+  @if $size==h5 {
     font-size: 0.9375rem;
     font-weight: 700;
   }
@@ -75,4 +70,10 @@ $gradient-black: #00000000,
     font-size: 0.625rem;
     font-weight: 300;
   }
+}
+
+@mixin gradientClip() {
+  background: linear-gradient(to right, $gradient-red);
+  background-clip: text;
+  color: transparent;
 }
