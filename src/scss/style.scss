@@ -1,1 +1,9 @@
-@import 'variables'
+@import 'variables';
+@import 'colormode';
+@import 'site';
+@import 'nav';
+
+.hidden {
+  opacity: 0;
+  pointer-events: none;
+}

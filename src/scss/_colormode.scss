@@ -1,0 +1,13 @@
+._dark {
+  --color-background: #{$color-secondary-dark};
+  --color-text: #{$color-secondary-light};
+  --color-navbar: #{$color-tertiary};
+  --color-shadow: #{rgba($color-tertiary, 0.9)};
+}
+
+._light {
+  --color-background: #{$color-secondary-light};
+  --color-text: #{$color-secondary-dark};
+  --color-navbar: #{$color-secondary-light};
+  --color-shadow: #{rgba($color-tertiary, 0.2)};
+}

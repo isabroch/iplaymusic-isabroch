@@ -1,0 +1,39 @@
+<nav class="nav nav_fixed">
+  <%# top bar navigation %>
+  <div class="navbar navbar_top">
+    <a href="/" aria-label="Go Back" class="navbar__link navbar__link_highlight">
+      <i class="fas fa-fw fa-chevron-left"></i>
+    </a>
+
+    <% if (title !== "") { %>
+    <span class="navbar__title"><%= title %></span>
+    <% } %>
+
+
+    <button aria-label="Search" class="navbar__link navbar__link_highlight <% if (!search) { %>hidden<% } %>">
+      <i class="fas fa-fw fa-search"></i>
+    </button>
+
+  </div>
+
+  <%# bottom bar navigation %>
+  <% if(active) {%>
+  <ul class="navbar navbar_bot">
+    <li><a href="/albums" aria-label="Albums" class="navbar__link <%= `${active === "albums" ? `navbar__link_highlight` : ''}` %>">
+      <i class="fab fa-fw fa-creative-commons-sampling"></i>
+    </a></licl>
+    <li><a href="/playlists" aria-label="Playlists" class="navbar__link <%= `${active === "playlists" ? `navbar__link_highlight` : ''}` %>">
+      <i class="fas fa-fw fa-microphone-alt"></i>
+    </a></li>
+    <li><a href="/" aria-label="Featured" class="navbar__link navbar__link_featured <%= `${active === "featured" ? `navbar__link_highlight` : ''}` %>">
+      <i class="fas fa-fw fa-podcast"></i>
+    </a></li>
+    <li><button aria-label="Color Scheme" class="js-toggle-colormode navbar__link <%= `${active === "color scheme" ? `navbar__link_highlight` : ''}` %>">
+      <i class="fas fa-fw fa-adjust"></i>
+    </button></li>
+    <li><a href="/categories" aria-label="Categories" class="navbar__link <%= `${active === "categories" ? `navbar__link_highlight` : ''}` %>">
+      <i class="fas fa-fw fa-cog"></i>
+    </a></li>
+  </ul>
+  <% } %>
+</nav>

@@ -24,7 +24,7 @@ $gradient-black: #00000000,
 #111111;
 
 // typography
-@mixin font($size) {
+@mixin typography($size: m) {
   line-height: 1.5;
 
   @if $size==h1 {
@@ -55,6 +55,10 @@ $gradient-black: #00000000,
   @if $size==h6 {
     font-size: 0.9375rem;
     font-weight: 700;
+  }
+
+  @if $size==l {
+    font-size: 1.25rem;
   }
 
   @if $size==m {
