@@ -1,17 +1,12 @@
-.featured {
+.featured-card-grid {
   display: grid;
-  grid-gap: 0.5rem 2rem;
+  grid-gap: 2rem;
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-
-  &__header {
-    grid-column: 1 / -1;
-  }
 }
 
 .feature-card {
   --card-bg: linear-gradient(to bottom, #{$gradient-red});
 
-  margin-bottom: 3rem;
   height: 100vh;
   max-height: 425px;
   background-image: linear-gradient(to bottom, $gradient-black), var(--card-bg);

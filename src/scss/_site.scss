@@ -16,8 +16,14 @@ body {
   background: var(--color-background);
   font-family: 'Poppins', sans-serif;
   color: var(--color-text);
+
+  // hide scrollbar
+  -ms-overflow-style: none;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .wrapper {
-  padding: 0px 25px;
+  padding: 0px 25px 45px;
 }

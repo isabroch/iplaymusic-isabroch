@@ -14,7 +14,8 @@
     width: 100%;
     display: flex;
     justify-content: space-between;
-    padding: 15px 5px;
+    $paddingside: 25px - 7.5px;
+    padding: 15px $paddingside;
     list-style: none;
     align-items: center;
     left: 0;
