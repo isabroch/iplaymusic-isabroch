@@ -4,7 +4,7 @@
   grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
 
   &__header {
-    grid-column: span 1 / -1;
+    grid-column: 1 / -1;
   }
 }
 
