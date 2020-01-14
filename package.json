@@ -5,16 +5,19 @@
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "gulp dev",
-    "build": "npm i && gulp build"
+    "build": "npm i && gulp build",
+    "doc": "jsdoc -c jsdoc.json"
   },
   "author": "Isabella Broch",
   "license": "MIT",
   "dependencies": {
+    "docdash": "^1.1.1",
     "ejs": "^2.7.1",
     "gulp": "^4.0.2",
     "gulp-connect": "^5.7.0",
     "gulp-ejs": "^4.1.2",
     "gulp-imagemin": "^6.1.1",
+    "gulp-jsdoc3": "^2.0.0",
     "gulp-open": "^3.0.1",
     "gulp-rename": "^1.4.0",
     "gulp-sass": "^4.0.2",

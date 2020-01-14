@@ -1,9 +1,12 @@
+// Imports
 import toggleColorMode from "./toggleColorMode.js";
-import lazyLoad from "./lazyLoad.js"
+import observe from "./observe.js"
 
+
+// Actually using the modules
 toggleColorMode;
 
-lazyLoad(
+observe(
   '.lazyLoad-background',
   function(el) {
     el.style = `--card-bg: url(${el.dataset.image})`;

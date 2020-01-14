@@ -6,6 +6,7 @@ const open = require("gulp-open");
 const imagemin = require("gulp-imagemin");
 const sass = require("gulp-sass");
 sass.compiler = require("node-sass");
+const jsdoc = require('gulp-jsdoc3');
 
 
 function html(done) {
@@ -50,7 +51,6 @@ function js(done) {
     .pipe(gulp.dest("./dist/assets/scripts"))
     .pipe(connect.reload());
 
-
   done();
 }
 
@@ -74,11 +74,34 @@ function watchImages() {
   }, images)
 }
 
+function documentation(done) {
+  const config = require('./jsdoc.json');
+  gulp.src('./src/scripts/**/*.js', {
+      read: false
+    })
+    .pipe(jsdoc(config))
+    .pipe(connect.reload());
+
+  done();
+}
+
+function watchDocumentation() {
+  gulp.watch("./src/scripts/**/*.js", {
+    ignoreInitial: false
+  }, documentation)
+}
+
 function connectServer(port = 8080) {
   connect.server({
     livereload: true,
     root: "dist",
     port: port
+  })
+
+  connect.server({
+    livereload: true,
+    root: "docs",
+    port: 7000
   })
 }
 
@@ -86,6 +109,11 @@ function openInBrowser(port = 8080) {
   gulp.src('dist/index.html')
     .pipe(open({
       uri: `http://localhost:${port}/`
+    }));
+
+  gulp.src('docs/index.html')
+    .pipe(open({
+      uri: `http://localhost:7000/`
     }));
 }
 
@@ -95,6 +123,7 @@ gulp.task("dev", function (done) {
   watchScss();
   watchJs();
   watchImages();
+  watchDocumentation();
   connectServer(port);
   openInBrowser(port);
   done();
@@ -106,6 +135,7 @@ gulp.task("build", function (done) {
   scss(done);
   js(done);
   images(done);
+  documentation(done);
 
   done();
 })
