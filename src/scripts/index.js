@@ -4,11 +4,12 @@ import observe from "./observe.js"
 
 
 // Actually using the modules
-toggleColorMode;
+toggleColorMode('.js-toggle-colormode');
 
 observe(
   '.lazyLoad-background',
   function(el) {
     el.style = `--card-bg: url(${el.dataset.image})`;
-  }
+  },
+  true
 );
