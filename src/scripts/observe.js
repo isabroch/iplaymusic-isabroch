@@ -39,7 +39,7 @@ const observe = (
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         cb(entry.target);
-        firesOnce && observer.unobserve(entry.target);
+        firesOnce && observer.unobserve(entry.target); // Read how this works at [https://blog.usejournal.com/mastering-javascripts-and-logical-operators-fd619b905c8f]
       }
     });
   }

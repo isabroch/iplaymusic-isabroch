@@ -3,7 +3,7 @@
 <head>
     
     <meta charset="utf-8">
-    <title>Home - Documentation</title>
+    <title>toggleColorMode.js - Documentation</title>
     
     
     <script src="scripts/prettify/prettify.js"></script>
@@ -32,129 +32,58 @@
 
 <div id="main">
     
+    <h1 class="page-title">toggleColorMode.js</h1>
+    
 
     
 
 
 
     
+    <section>
+        <article>
+            <pre class="prettyprint source linenums"><code>/* Switching color mode between light and dark */
 
+/**
+ *
+ * @param {string} selector - The CSS selector for the elements that are targeted, as a string.
+ */
+const colorMode = (selector) => {
+  function colorMode(toggle = false) {
+    let mode = localStorage.getItem('colorMode');
 
-    <section class="package">
-        <h3> </h3>		
+    if (!mode) {
+      mode = 'dark'
+    };
+
+    if (toggle) {
+      switch (mode) {
+        case 'dark':
+          mode = 'light';
+          break;
+
+        case 'light':
+          mode = 'dark';
+          break;
+      }
+    }
+
+    localStorage.setItem('colorMode', mode)
+    document.querySelector('body').classList = `_${mode}`;
+
+    return mode;
+  }
+
+  document.querySelector(selector).addEventListener('click', () => {
+    colorMode(true);
+  })
+
+  return colorMode(false);
+}
+
+export default colorMode;</code></pre>
+        </article>
     </section>
-
-
-
-
-
-
-
-
-
-    
-
-
-
-
-
-
-
-
-
-
-
-<section>
-
-<header>
-    
-        <h2>
-        observe.js
-        </h2>
-        
-    
-</header>
-
-<article>
-    
-        <div class="container-overview">
-        
-            
-
-<dl class="details">
-
-    
-    <dt class="tag-source">Source:</dt>
-    <dd class="tag-source"><ul class="dummy"><li>
-        <a href="observe.js.html">observe.js</a>, <a href="observe.js.html#line1">line 1</a>
-    </li></ul></dd>
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-
-    
-</dl>
-
-
-
-
-            
-                <div class="description">Module to use intersection observer, e.g. with lazy loading. Testing change.</div>
-            
-
-            
-        
-        </div>
-    
-
-    
-
-    
-
-    
-    
-    
-
-     
-
-    
-
-    
-
-    
-
-    
-
-    
-</article>
-
-</section>
 
 
 
