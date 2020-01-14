@@ -1,10 +1,7 @@
 .nav {
-  height: 100%;
-  display: flex;
-  flex-direction: column;
+  position: relative;
 
   &_fixed {
-    position: fixed;
     top: 0;
     bottom: 0;
     left: 0;
@@ -13,6 +10,8 @@
   }
 
   &bar {
+    position: fixed;
+    width: 100%;
     display: flex;
     justify-content: space-between;
     padding: 15px 5px;
@@ -22,6 +21,7 @@
     &_top {
       color: var(--color-text);
       @include typography(m);
+      top: 0;
     }
 
     &_bot {
@@ -29,6 +29,7 @@
       background: var(--color-navbar);
       margin-top: auto;
       @include typography(l);
+      bottom: 0;
     }
 
     &__title {
