@@ -2,13 +2,33 @@
 
 <%- include('../partials/navigation', {title: 'Featured', search: true, back: false, active: 'featured'}) %>
 
-<main class="featured">
-  <h1 class="header header_primary">
+<main class="featured wrapper">
+  <h1 class="header header_primary featured__header">
     Featured
   </h1>
+
+  <article class="feature-card lazyLoad-background" data-image="http://placekitten.com/500/600">
+    <h2 class="feature-card__title">The Greatest Showman</h2>
+    <h3 class="feature-card__type">Soundtrack</h3>
+    <a href="#soundtrack" class="feature-card__link"></a>
+  </article>
+
+  <article class="feature-card lazyLoad-background" data-image="http://placekitten.com/500/600">
+    <h2 class="feature-card__title">The Greatest Showman</h2>
+    <h3 class="feature-card__type">Soundtrack</h3>
+    <a href="#soundtrack" class="feature-card__link"></a>
+  </article>
+
+
 </main>
 
-
+<template>
+  <article class="feature-card lazyLoad-background" data-image="http://placekitten.com/500/600">
+    <h2 class="feature-card__title">The Greatest Showman</h2>
+    <h3 class="feature-card__type">Soundtrack</h3>
+    <a href="#soundtrack" class="feature-card__link"></a>
+  </article>
+</template>
 
 
 
