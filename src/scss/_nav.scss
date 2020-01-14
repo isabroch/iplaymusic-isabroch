@@ -43,15 +43,19 @@
 
     &__link {
       cursor: pointer;
-      @include gradientClip();
-      color: transparent;
+      background: none;
       border: none;
       display: block;
       font-family: inherit;
       font-size: inherit;
       padding: 5px 7.5px;
 
-      &_highlight {
+      i {
+        @include gradientClip();
+        color: transparent;
+      }
+
+      &_highlight i {
         background: var(--color-text);
         background-clip: text;
       }
