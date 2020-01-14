@@ -7,6 +7,7 @@ const imagemin = require("gulp-imagemin");
 const sass = require("gulp-sass");
 sass.compiler = require("node-sass");
 const jsdoc = require('gulp-jsdoc3');
+const prefix = require('gulp-autoprefixer');
 
 
 function html(done) {
@@ -34,6 +35,9 @@ function watchHtml() {
 function scss(done) {
   gulp.src("./src/scss/**/*.scss")
     .pipe(sass())
+    .pipe(prefix({
+      cascade: false
+    }))
     .pipe(gulp.dest("./dist/assets/css"))
     .pipe(connect.reload());
 
