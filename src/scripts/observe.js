@@ -15,7 +15,8 @@
  *
  * @param {string} [selector] - The CSS selector for the elements that are targeted, as a string.
  * @param {callback} [cb] - Action to perform on each element targeted by the selector.
- * @param {string} [rootMargin] - Root margin to be used with intersection observer API. Positive values are outset, negative values are inset. Read IO documentation for more information.
+ * @param {boolean} [firesOnce] - If true, will unobserve element after running the callback. False will not unobserve element.
+ * @param {string} [rootMargin] - Root margin to be used with intersection observer API. Positive values are outset, negative values are inset. Read IO documentation for more information. All values must be px or %, even 0.
  * @param {number} [threshold] - How much of the element must be 'observed', from [0 (just a pixel), 1 (the entire element)]. Read IO documentation for more information.
  *
  * @return {HTMLCollection} List of all the elements being targeted by selector parameter.
@@ -25,6 +26,7 @@ const observe = (
   cb = function(el) {
     console.log(`${el} has been spotted, and is doing nothing!`)
   },
+  firesOnce,
   rootMargin = '0px 0px 50% 0px',
   threshold = 0
 ) => {
@@ -37,7 +39,7 @@ const observe = (
     entries.forEach(entry => {
       if (entry.isIntersecting) {
         cb(entry.target);
-        observer.unobserve(entry.target);
+        firesOnce && observer.unobserve(entry.target);
       }
     });
   }
