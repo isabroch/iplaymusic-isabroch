@@ -1,6 +1,4 @@
-/**
- * @file Module to use intersection observer, e.g. with lazy loading. Testing change.
- */
+/** @module observe */
 
 /**
  * Perform action on an unknown target

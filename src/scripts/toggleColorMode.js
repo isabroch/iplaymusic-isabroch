@@ -1,8 +1,8 @@
-/* Switching color mode between light and dark */
+/** @module switchColorMode */
 
 /**
  *
- * @param {string} selector - The CSS selector for the elements that are targeted, as a string.
+ * @param {string} selector - CSS Selector for the element that will trigger toggling modes.
  */
 const colorMode = (selector) => {
   function colorMode(toggle = false) {
