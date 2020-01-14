@@ -1,7 +1,7 @@
 <nav class="nav nav_fixed">
   <%# top bar navigation %>
   <div class="navbar navbar_top">
-    <a href="/" aria-label="Go Back" class="navbar__link navbar__link_highlight">
+    <a href="/" aria-label="Go Back" class="navbar__link navbar__link_highlight <% if (!back) { %>hidden<% } %>">
       <i class="fas fa-fw fa-chevron-left"></i>
     </a>
 
