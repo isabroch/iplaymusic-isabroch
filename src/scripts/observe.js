@@ -36,8 +36,11 @@ const observe = (
   }
 
   const callback = (entries, observer) => {
+
     entries.forEach(entry => {
+
       if (entry.isIntersecting) {
+
         cb(entry.target);
         firesOnce && observer.unobserve(entry.target); // Read how this works at [https://blog.usejournal.com/mastering-javascripts-and-logical-operators-fd619b905c8f]
       }
@@ -45,18 +48,19 @@ const observe = (
   }
 
   let elements;
+  const io = new IntersectionObserver(callback, options);
 
   if (Array.isArray(selector)) {
     elements = document.querySelectorAll(selector);
     for (const element of elements) {
-      new IntersectionObserver(callback, options).observe(element);
+      io.observe(element);
     }
   } else if (typeof selector == "string") {
     elements = document.querySelector(selector);
-    new IntersectionObserver(callback, options).observe(elements);
+    io.observe(elements);
   } else if (selector instanceof Element || selector instanceof HTMLDocument) {
     elements = selector;
-    new IntersectionObserver(callback, options).observe(elements);
+    io.observe(elements);
   }
 
   return elements;
