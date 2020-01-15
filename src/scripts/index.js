@@ -1,11 +1,8 @@
 // Imports
-import toggleColorMode from "./toggleColorMode.js";
 import observe from "./observe.js";
 import cloneTemplate from "./cloneTemplate.js";
 
 // Actually using the modules
-toggleColorMode('.js-toggle-colormode');
-
 [1, 2, 3, 4, 5, 6].forEach((item) => {
   cloneTemplate(
     document.querySelector('.featured-card-grid'),
