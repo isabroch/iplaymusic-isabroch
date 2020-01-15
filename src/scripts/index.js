@@ -7,13 +7,12 @@ import cloneTemplate from "./cloneTemplate.js";
   cloneTemplate(
     document.querySelector('.featured-card-grid'),
     document.getElementById('feature-card'),
-    '.feature-card__',
-    ['title', 'type', 'link', 'background'],
+    ['.feature-card__title', '.feature-card__type', '.feature-card__link', '.feature-card__background'],
     (template) => {
-      template.title.textContent = `${item.name}`;
-      template.type.textContent = `${item.type}`;
-      template.link.href = `#${item.link}`;
-      template.background.dataset.image = `http://placekitten.com/200/300?image=${item.image}`
+      template[0].textContent = `${item.name}`;
+      template[1].textContent = `${item.type}`;
+      template[2].href = `#${item.link}`;
+      template[3].dataset.image = `http://placekitten.com/200/300?image=${item.image}`
     }
   );
 })
