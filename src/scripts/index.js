@@ -13,14 +13,16 @@ import cloneTemplate from "./cloneTemplate.js";
       template[1].textContent = `${item.type}`;
       template[2].href = `#${item.link}`;
       template[3].dataset.image = `http://placekitten.com/200/300?image=${item.image}`
+
+      observe(
+        template[3],
+        function (el) {
+          console.log(el);
+          el.style = `--card-bg: url(${el.dataset.image})`;
+        },
+        true,
+        '0px 0px -50% 0px'
+      );
     }
   );
 })
-
-observe(
-  '.lazyLoad-background',
-  function (el) {
-    el.style = `--card-bg: url(${el.dataset.image})`;
-  },
-  true
-);
