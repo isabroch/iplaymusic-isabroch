@@ -17,8 +17,7 @@
   </div>
 
   <%# bottom bar navigation %>
-  <% if(active) {%>
-  <ul class="navbar navbar_bot">
+  <ul class="navbar navbar_bot <% if(!active) {%> hidden<% } %>" >
     <li><a href="/albums" aria-label="Albums" class="navbar__link <%= `${active === "albums" ? `navbar__link_highlight` : ''}` %>">
       <i class="fab fa-fw fa-creative-commons-sampling"></i>
     </a></licl>
@@ -35,5 +34,4 @@
       <i class="fas fa-fw fa-cog"></i>
     </a></li>
   </ul>
-  <% } %>
 </nav>
