@@ -72,3 +72,12 @@ $gradient-black: #00000000 50%,
   background-clip: text;
   color: transparent;
 }
+
+@mixin shadow($size: s) {
+  @if $size==l {
+    filter: drop-shadow(0px 0px 20px var(--color-shadow)) drop-shadow(0px 3px 5px var(--color-shadow)) drop-shadow(0px 2px 1px var(--color-shadow));
+}
+  @if $size==s {
+    filter: drop-shadow(0px 3px 3px var(--color-shadow)) drop-shadow(0px 2px 2px var(--color-shadow)) drop-shadow(0px 1px 1px var(--color-shadow));
+  }
+}
