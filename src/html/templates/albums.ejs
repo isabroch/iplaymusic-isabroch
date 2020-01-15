@@ -4,6 +4,75 @@
 
 <main class="wrapper">
   <%- include('../partials/header', {state: 'gradient', title: 'All Albums'}) %>
+
+  <article class="music-section" id="featured-albums">
+    <div class="music-section__start">
+      <h2 class="music-section__title">Featured Albums</h2>
+      <a href="" class="music-section__link">View All</a>
+    </div>
+
+    <%# Section type goes in here! %>
+  </article>
+
+  <article class="music-section" id="new-releases">
+    <div class="music-section__start">
+      <h2 class="music-section__title">New Releases</h2>
+      <a href="" class="music-section__link">View All</a>
+    </div>
+
+    <%# Section type goes in here! %>
+  </article>
+
+  <%# more music sections go here! %>
 </main>
+
+
+<template id="music-section">
+  <article class="music-section">
+    <div class="music-section__start">
+      <h2 class="music-section__title">Title</h2>
+      <a href="" class="music-section__link">View All</a>
+    </div>
+
+    <%# Section type goes in here! %>
+  </article>
+</template>
+
+<%# Thumbnails view %>
+<template id="view__thumbnails">
+  <div class="music-section thumbnails _no-scrollbar">
+    <%# Thumbnail items go here %>
+  </div>
+
+  <template id="item">
+    <article class="thumbnails__item">
+      <img src="" data-lazysrc="http://placekitten.com/200/200" alt="Kitten" class="thumbnails__item-img">
+      <a href="" class="thumbnails__item-link"></a>
+    </article>
+  </template>
+</template>
+<%# Thumbnails view end %>
+
+<%# Album list view %>
+<template id="view__album-list">
+  <div class="music-section album-list">
+    <%# List items go here %>
+  </div>
+
+  <template id="item">
+    <article class="album-list__item">
+      <div class="album-list__item-img-container">
+        <img src="" data-lazysrc="http://placekitten.com/200/200" alt="" class="album-list__item-img">
+      </div>
+      <h3 class="album-list__item-name" aria-label="Name">Old Town Road</h3>
+      <span class="album-list__item-artist" aria-label="Artist">Billy Ray Cyrus</span>
+      <span class="album-list__item-song-count">12 Songs</span>
+      <a href="" class="album-list__item-link"></a>
+    </article>
+  </template>
+</template>
+<%# Album list view end %>
+
+</template>
 
 <%- include('../partials/doc-end', {file: 'albums'}) %>
