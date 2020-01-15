@@ -1,5 +1,16 @@
 .header {
-  @include gradientClip();
   @include typography(h2);
   margin-bottom: 0.75rem;
+
+  &_gradient {
+    @include gradientClip();
+  }
+
+  &_light {
+    color: $color-secondary-light;
+  }
+
+  &_dark {
+    color: $color-secondary-dark;
+  }
 }

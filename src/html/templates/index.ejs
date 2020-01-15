@@ -3,15 +3,10 @@
 <%- include('../partials/navigation', {title: 'Featured', search: true, back: false, active: 'featured'}) %>
 
 <main class="wrapper">
-  <h1 class="header header_primary">
-    Featured
-  </h1>
+  <%- include('../partials/header', {state: 'gradient', title: 'Featured'}) %>
 
   <div class="featured-card-grid">
-
   </div>
-
-
 </main>
 
 <template id="feature-card">
@@ -19,7 +14,7 @@
     <h2 class="feature-card__title">The Greatest Showman</h2>
     <h3 class="feature-card__type">Soundtrack</h3>
     <a href="#soundtrack" class="feature-card__link"></a>
-    </article>
+  </article>
 </template>
 
 <%- include('../partials/doc-end', {file: 'index'}) %>
