@@ -87,9 +87,7 @@ $rainbow-colors: #D70060,
         }
 
         &:hover, &:active {
-          color: transparent;
-          background-clip: text;
-          background-image: linear-gradient(to right, $gradient-red);
+          @include gradientClip;
         }
       }
     }
