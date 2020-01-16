@@ -1,11 +1,11 @@
-._dark {
+[data-colormode="dark"] {
   --color-background: #{$color-secondary-dark};
   --color-text: #{$color-secondary-light};
   --color-navbar: #{$color-tertiary};
   --color-shadow: #{rgba($color-tertiary, 0.5)};
 }
 
-._light {
+[data-colormode="light"] {
   --color-background: #{$color-secondary-light};
   --color-text: #{$color-secondary-dark};
   --color-navbar: #{$color-secondary-light};

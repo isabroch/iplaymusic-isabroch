@@ -25,7 +25,8 @@ const colorMode = (selector) => {
     }
 
     localStorage.setItem('colorMode', mode)
-    document.querySelector('body').classList = `_${mode}`;
+
+    document.querySelector('body').dataset.colormode = `${mode}`;
 
     return mode;
   }
