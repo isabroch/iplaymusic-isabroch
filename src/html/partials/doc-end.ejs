@@ -1,6 +1,9 @@
-<script src="/assets/scripts/site.js" type="module" defer></script>
+<script src="https://unpkg.com/@isabroch/fetch-fallback@1.1.6/umd.js"></script>
+
+<script src="/assets/scripts/site.js" type="module"></script>
+
 <% if (locals.file) { %>
-  <script src="/assets/scripts/<%- file %>.js" type="module" defer></script>
+  <script src="/assets/scripts/<%- file %>.js" type="module"></script>
 <% } %>
 </body>
 
