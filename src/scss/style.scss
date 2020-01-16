@@ -3,9 +3,11 @@
 @import 'site';
 @import 'nav';
 @import 'header';
+@import 'ratio';
 @import 'featured';
 @import 'categories';
 @import 'albums';
+@import 'playlists';
 
 .hidden {
   opacity: 0;

@@ -25,6 +25,10 @@
       color: var(--color-text);
       @include typography(m);
       top: 0;
+
+      &.navbar_light {
+        --color-text: #{$color-secondary-light};
+      }
     }
 
     &_bot {

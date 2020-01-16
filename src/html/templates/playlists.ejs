@@ -1,9 +1,39 @@
-<%- include('../partials/doc-start', {title: 'Playlists'}) %>
+<%- include('../partials/doc-start', {title: 'Playlists', bodyClass: 'bg_playlist', resources: ['<link rel="stylesheet" href="https://unpkg.com/flickity@2/dist/flickity.min.css" media="screen">']}) %>
 
-<%- include('../partials/navigation', {title: 'Playlists', search: true, back: true, active: 'playlists'}) %>
+<%- include('../partials/navigation', {title: 'Playlists', search: true, back: true, active: 'playlists', stayWhite: true}) %>
 
 <main class="wrapper">
   <%- include('../partials/header', {state: 'light', title: 'Playlists'}) %>
+
+  <div class="carousel">
+
+    <ul class="carousel__track">
+
+      <li class="carousel__cell">
+        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
+      </li>
+      <li class="carousel__cell">
+        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
+      </li>
+      <li class="carousel__cell">
+        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
+      </li>
+      <li class="carousel__cell">
+        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
+      </li>
+      <li class="carousel__cell">
+        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
+      </li>
+      <li class="carousel__cell">
+        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
+      </li>
+
+    </ul>
+
+  </div>
+
 </main>
 
-<%- include('../partials/doc-end', {file: ''}) %>
+<script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js" defer></script>
+
+<%- include('../partials/doc-end', {file: 'playlists'}) %>

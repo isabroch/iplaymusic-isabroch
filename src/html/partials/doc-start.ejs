@@ -13,7 +13,13 @@
   <!-- Icons: Fontawesome -->
   <script src="https://kit.fontawesome.com/1035311ad5.js" crossorigin="anonymous" defer></script>
 
+  <% if (locals.resources) { %>
+  <% for (const resource of resources) { %>
+  <%- resource %>
+  <% } %>
+  <% } %>
+
   <link rel="stylesheet" href="/assets/css/style.css">
 </head>
 
-<body class="_no-scrollbar" data-colormode="dark">
+<body class="_no-scrollbar <%= locals.bodyClass ? `${bodyClass}` : '' %>" data-colormode="dark">

@@ -1,6 +1,6 @@
 <nav class="nav nav_fixed">
   <%# top bar navigation %>
-  <div class="navbar navbar_top">
+  <div class="navbar navbar_top <% if (locals.stayWhite) { %>navbar_light<% } %>">
     <a href="/" aria-label="Go Back" class="navbar__link navbar__link_highlight <% if (!back) { %>hidden<% } %>">
       <i class="fas fa-fw fa-chevron-left"></i>
     </a>
