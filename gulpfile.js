@@ -115,10 +115,10 @@ function openInBrowser(port = 8080) {
       uri: `http://localhost:${port}/`
     }));
 
-  gulp.src('docs/index.html')
-    .pipe(open({
-      uri: `http://localhost:7000/`
-    }));
+  // gulp.src('docs/index.html')
+  //   .pipe(open({
+  //     uri: `http://localhost:7000/`
+  //   }));
 }
 
 gulp.task("dev", function (done) {
