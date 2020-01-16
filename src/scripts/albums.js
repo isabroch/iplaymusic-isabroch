@@ -1,166 +1,98 @@
 // Imports
-import cloneTemplate from "./cloneTemplate.js";
 import observe from "./observe.js";
 
+// FETCH
+xfetch.init({
+  address: "https://reqres.in/api/",
+  key: ""
+});
 
-// Actually using the modules
+xfetch.get("users")
+  .then(result => {
+    const users = result.data;
 
-const featuredAlbums = (() => {
-  const albums = [
-    {
-      name: 'Album Uno',
-      artist: 'El Spano',
-      songs: ['Uno', 'Dos', 'Tres', 'Quatro'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album To',
-      artist: 'El Dano',
-      songs: ['En', 'To', 'Tre'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album San',
-      artist: 'El Japajapa',
-      songs: ['Ichi', 'Ni', 'San', 'Shi', 'Go'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album Uno',
-      artist: 'El Spano',
-      songs: ['Uno', 'Dos', 'Tres', 'Quatro'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album To',
-      artist: 'El Dano',
-      songs: ['En', 'To', 'Tre'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album San',
-      artist: 'El Japajapa',
-      songs: ['Ichi', 'Ni', 'San', 'Shi', 'Go'],
-      img: 'http://placekitten.com/300/300'
-    }
-  ]
+    let albums = [];
 
-  // Creating thumbnail view
-  cloneTemplate(
-    document.querySelector('#featured-albums'),
-    document.querySelector('#view__thumbnails'),
-    ['.music-section', '#item'],
-    (section) => {
-
-      // Creating thumbnail view items
-      for (const album of albums) {
-        cloneTemplate(
-          section[0],
-          section[1],
-          ['.thumbnails__item-img', '.thumbnails__item-link', '.thumbnails__item'],
-          (item) => {
-            item[0].dataset.lazysrc = album.img;
-            item[0].alt = `${album.name} by ${album.artist}`;
-            item[1].href = `/album-details?album=${album.name}`;
-
-            observe(
-              item[0],
-              function (el) {
-                console.log(el);
-                el.src = el.dataset.lazysrc;
-              },
-              true,
-              '0px 50% 0px 50%'
-            );
-          }
-        )
+    for (const user of users) {
+      let album = {
+        img: user.avatar,
+        name: user.first_name,
+        artist: user.last_name,
+        songCount: user.id,
+        songs: ['a', 'b', 'c']
       }
-      // END: Creating thumbnail view items
 
+      albums.push(album)
     }
-  )
-  // END: Creating thumbnail view
-})();
 
-const newReleases = (() => {
-  const albums = [
-    {
-      name: 'Album Uno',
-      artist: 'El Spano',
-      songs: ['Uno', 'Dos', 'Tres', 'Quatro'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album To',
-      artist: 'El Dano',
-      songs: ['En', 'To', 'Tre'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album Uno',
-      artist: 'El Spano',
-      songs: ['Uno', 'Dos', 'Tres', 'Quatro'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album To',
-      artist: 'El Dano',
-      songs: ['En', 'To', 'Tre'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album Uno',
-      artist: 'El Spano',
-      songs: ['Uno', 'Dos', 'Tres', 'Quatro'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album To',
-      artist: 'El Dano',
-      songs: ['En', 'To', 'Tre'],
-      img: 'http://placekitten.com/300/300'
-    },
-    {
-      name: 'Album San',
-      artist: 'El Japajapa',
-      songs: ['Ichi', 'Ni', 'San', 'Shi', 'Go'],
-      img: 'http://placekitten.com/300/300'
-    }
-  ]
-  // Creating list view
-  cloneTemplate(
-    document.querySelector('#new-releases'),
-    document.querySelector('#view__album-list'),
-    ['.music-section', '#item'],
-    (section) => {
+    featuredAlbums(albums);
+    newReleases(albums);
+  });
 
-      // Creating list view items
-      for (const album of albums) {
-        cloneTemplate(
-          section[0],
-          section[1],
-          ['.album-list__item-img', '.album-list__item-name', '.album-list__item-artist', '.album-list__item-song-count', '.album-list__item-link'],
-          (item) => {
-            item[0].dataset.lazysrc = album.img;
-            item[1].textContent = album.name;
-            item[2].textContent = album.artist;
-            item[3].textContent = `${album.songs.length} Songs`;
-            item[4].href = `/album-details?album=${album.name}`;
+function featuredAlbums(albums) {
+  const viewContainer = document.querySelector('#featured-albums');
+  const viewTemplate = document.querySelector('#view__thumbnails');
+  const viewClone = viewTemplate.content.cloneNode(true);
 
-            observe(
-              item[0],
-              function (el) {
-                console.log(el);
-                el.src = el.dataset.lazysrc;
-              },
-              true,
-              '50% 0px 50% 0px'
-            );
-          }
-        )
-      }
-      // END: Creating list view items
-    }
-  )
-  // END: Creating list view
-})();
+  const itemContainer = viewClone.querySelector('.music-section');
+  const itemTemplate = document.querySelector('#item__thumbnails');
+
+  for (const album of albums) {
+    const itemClone = itemTemplate.content.cloneNode(true);
+
+    const itemFields = ['.thumbnails__item-img', '.thumbnails__item-link'].map(query => itemClone.querySelector(query));
+
+    itemFields[0].dataset.lazysrc = album.img;
+    itemFields[0].alt = `${album.name} by ${album.artist}`;
+    itemFields[1].href = `/album-details?album=${album.name}`;
+
+    itemContainer.appendChild(itemClone);
+  }
+
+  viewContainer.appendChild(viewClone);
+
+  observe(
+    ['.thumbnails__item-img'],
+    function (el) {
+      console.log(el);
+      el.src = el.dataset.lazysrc;
+    },
+    true,
+    '50% 0px 50% 0px'
+  );
+}
+
+function newReleases(albums) {
+  const viewContainer = document.querySelector('#new-releases');
+  const viewTemplate = document.querySelector('#view__album-list');
+  const viewClone = viewTemplate.content.cloneNode(true);
+
+  const itemContainer = viewClone.querySelector('.music-section');
+  const itemTemplate = document.querySelector('#item__album-list');
+
+  for (const album of albums) {
+    const itemClone = itemTemplate.content.cloneNode(true);
+
+    const itemFields = ['.album-list__item-img', '.album-list__item-name', '.album-list__item-artist', '.album-list__item-song-count', '.album-list__item-link'].map(query => itemClone.querySelector(query));
+
+    itemFields[0].dataset.lazysrc = album.img;
+    itemFields[1].textContent = album.name;
+    itemFields[2].textContent = album.artist;
+    itemFields[3].textContent = `${album.songs.length} Songs`;
+    itemFields[4].href = `/album-details?album=${album.name}`;
+
+    itemContainer.appendChild(itemClone);
+  }
+
+  viewContainer.appendChild(viewClone);
+
+  observe(
+    ['.album-list__item-img'],
+    function (el) {
+      console.log(el);
+      el.src = el.dataset.lazysrc;
+    },
+    true,
+    '50% 0px 50% 0px'
+  );
+}

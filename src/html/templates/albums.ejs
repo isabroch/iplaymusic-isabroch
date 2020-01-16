@@ -43,13 +43,13 @@
   <div class="music-section thumbnails _no-scrollbar">
     <%# Thumbnail items go here %>
   </div>
+</template>
 
-  <template id="item">
-    <article class="thumbnails__item">
-      <img src="" data-lazysrc="http://placekitten.com/200/200" alt="Kitten" class="thumbnails__item-img">
-      <a href="" class="thumbnails__item-link"></a>
-    </article>
-  </template>
+<template id="item__thumbnails">
+  <article class="thumbnails__item">
+    <img src="" data-lazysrc="http://placekitten.com/200/200" alt="Kitten" class="thumbnails__item-img">
+    <a href="" class="thumbnails__item-link"></a>
+  </article>
 </template>
 <%# Thumbnails view end %>
 
@@ -58,18 +58,18 @@
   <div class="music-section album-list">
     <%# List items go here %>
   </div>
+</template>
 
-  <template id="item">
-    <article class="album-list__item">
-      <div class="album-list__item-img-container">
-        <img src="" data-lazysrc="http://placekitten.com/200/200" alt="" class="album-list__item-img">
-      </div>
-      <h3 class="album-list__item-name" aria-label="Name">Old Town Road</h3>
-      <span class="album-list__item-artist" aria-label="Artist">Billy Ray Cyrus</span>
-      <span class="album-list__item-song-count">12 Songs</span>
-      <a href="" class="album-list__item-link"></a>
-    </article>
-  </template>
+<template id="item__album-list">
+  <article class="album-list__item">
+    <div class="album-list__item-img-container">
+      <img src="" data-lazysrc="http://placekitten.com/200/200" alt="" class="album-list__item-img">
+    </div>
+    <h3 class="album-list__item-name" aria-label="Name">Old Town Road</h3>
+    <span class="album-list__item-artist" aria-label="Artist">Billy Ray Cyrus</span>
+    <span class="album-list__item-song-count">12 Songs</span>
+    <a href="" class="album-list__item-link"></a>
+  </article>
 </template>
 <%# Album list view end %>
 
