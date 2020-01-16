@@ -1,7 +1,3 @@
-// Imports
-import cloneTemplate from "./cloneTemplate.js";
-
-// Actually using the modules
 const genres = [
   {name: 'Alternative', subgenres: ['Dark', 'Light']},
   {name: 'Blues', subgenres: ['Dark', 'Light']},
@@ -17,23 +13,30 @@ const genres = [
 ]
 
 genres.forEach((genre) => {
-  cloneTemplate(
-    document.querySelector('.category-list'),
-    document.getElementById('category'),
-    ['.category-list__item-title', '.category-list__sublist', '#category-item'],
-    (category) => {
-      category[0].textContent = genre.name;
-      genre.subgenres.forEach( (subgenre) => {
-        cloneTemplate(
-          category[1],
-          category[2],
-          ['.category-list__subitem-link'],
-          (categoryItem) => {
-            categoryItem[0].href = `#${subgenre}`;
-            categoryItem[0].textContent = subgenre;
-          }
-        )
-      })
-    }
-  );
+  createCategory(genre.name, genre.subgenres);
 })
+
+function createCategory(genre, subgenres) {
+  const genreContainer = document.querySelector('.category-list');
+  const genreTemplate = document.querySelector('#category');
+  const genreClone = genreTemplate.content.cloneNode(true);
+
+  const genreField = genreClone.querySelector('.category-list__item-title');
+  genreField.textContent = genre;
+
+  const subGenreContainer = genreClone.querySelector('.category-list__sublist');
+  const subGenreTemplate = genreClone.querySelector('#category-item');
+
+  for (const subgenre of subgenres) {
+    const subGenreClone = subGenreTemplate.content.cloneNode(true);
+
+    const subGenreField = subGenreClone.querySelector('.category-list__subitem-link');
+
+    subGenreField.href = `#${subgenre}`;
+    subGenreField.textContent = subgenre;
+
+    subGenreContainer.appendChild(subGenreClone);
+  }
+
+  genreContainer.appendChild(genreClone);
+}
