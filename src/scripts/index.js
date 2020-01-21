@@ -1,7 +1,28 @@
 // Imports
 import observe from "./observe.js";
+import encodeParams from "./encodeParams.js";
 
 // FETCH
+async function auth() {
+  const paramString = encodeParams({
+    'grant_type': 'client_credentials'
+  });
+
+  const data = await fetch('https://accounts.spotify.com/api/token', {
+    method: 'POST',
+    body: paramString,
+    headers: {
+      'Authorization': 'Basic MjYyNTNlOWY5NWQ5NDgzNzhlMWU3MGQ5NTUyYTZlZmE6NjQ4OGE5MzU3MWViNGRkODhjOTkzNDQ0YTdmNGM3NWM=',
+      'Content-Type': 'application/x-www-form-urlencoded'
+    }
+  });
+
+  const response = await data.json();
+
+  console.log(response);
+}
+
+auth();
 
 xfetch.init({
   address: "https://reqres.in/api/",
@@ -31,7 +52,6 @@ xfetch.get("users")
     observe(
       ['.feature-card__background'],
       function (el) {
-        console.log(el);
         el.style = `--card-bg: url(${el.dataset.image})`;
       },
       true,
