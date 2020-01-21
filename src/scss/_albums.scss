@@ -102,13 +102,16 @@
       grid-area: name;
       display: block;
       align-self: flex-end;
-      @include typography(h6)
+      @include typography(h6);
+      @extend %oneline;
     }
     &-artist {
       grid-area: artist;
       display: block;
       align-self: flex-start;
-      @include typography(s)
+      @include typography(s);
+      @extend %oneline;
+
     }
     &-song-count {
       grid-area: count;

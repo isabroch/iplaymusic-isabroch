@@ -81,3 +81,9 @@ $gradient-black: #00000000 50%,
     filter: drop-shadow(0px 3px 3px var(--color-shadow)) drop-shadow(0px 2px 2px var(--color-shadow)) drop-shadow(0px 1px 1px var(--color-shadow));
   }
 }
+
+%oneline {
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
