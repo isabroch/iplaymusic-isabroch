@@ -4,17 +4,33 @@ import encodeParams from "./encodeParams.js";
 import randSample from "./randomFromArray.js";
 
 // FETCH
-async function auth() {
+function auth() {
+  if (window.localStorage.getItem('token')) {
+    const authentication = window.localStorage.getItem('token');
+
+    return authentication;
+  }
+
   if (window.location.hash) {
+    // url is returned with #, this creates search params by giving a query WITHOUT #
+    const params = new URLSearchParams(window.location.hash.substring(1));
 
-    return;
+    // calling spotify api requires authetnication
+    const authentication = `${params.get('token_type')} ${params.get('access_token')}`;
 
+    // create local storage item to remember token
+    window.localStorage.setItem('token', authentication)
+
+    // 'cleans' the url
+    window.location.href = window.location.origin;
+
+    return authentication;
   }
 
   const paramString = encodeParams({
     'client_id': '26253e9f95d948378e1e70d9552a6efa',
     'response_type': 'token',
-    'redirect_uri': 'http://localhost:8080/'
+    'redirect_uri': window.location.href
   });
 
   window.location.href = `https://accounts.spotify.com/authorize?${paramString}`;
