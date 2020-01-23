@@ -9,33 +9,31 @@
 
     <ul class="carousel__track">
 
-      <li class="carousel__cell">
-        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
-      </li>
-      <li class="carousel__cell">
-        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
-      </li>
-      <li class="carousel__cell">
-        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
-      </li>
-      <li class="carousel__cell">
-        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
-      </li>
-      <li class="carousel__cell">
-        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
-      </li>
-      <li class="carousel__cell">
-        <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" alt="" class="ratio__img"></div>
-      </li>
+
 
     </ul>
 
   </div>
 
-  <ol class="songs">
+  <article class="playlist-info">
+    <h1 class="playlist-info__title">Title</h1>
 
-  </ol>
+    <ol class="playlist-info__track-list">
+      <li class="playlist-info__track track">
+        <a href="" class="track__link">
+          <button class="track__play"></button>
+
+        </a>
+      </li>
+    </ol>
+  </article>
 </main>
+
+<template id="carousel-cell">
+  <li class="carousel__cell" data-id="">
+    <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" data-lazysrc="" alt="" class="ratio__img carousel__cell-image"></div>
+  </li>
+</template>
 
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js" defer></script>
 

@@ -13,6 +13,10 @@ $gradient-green: #5EB11C,
 $gradient-black: #00000000 50%,
 #111111 100%;
 
+// sizing
+$padSide: 25px;
+
+
 // typography
 @mixin typography($size: m) {
   line-height: 1.5;
