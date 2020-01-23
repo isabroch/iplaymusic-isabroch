@@ -5,22 +5,19 @@ import randSample from "./randomFromArray.js";
 
 // FETCH
 async function auth() {
+  if (window.location.hash) {
+
+    return;
+
+  }
+
   const paramString = encodeParams({
-    'grant_type': 'client_credentials'
+    'client_id': '26253e9f95d948378e1e70d9552a6efa',
+    'response_type': 'token',
+    'redirect_uri': 'http://localhost:8080/'
   });
 
-  const data = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    body: paramString,
-    headers: {
-      'Authorization': 'Basic MjYyNTNlOWY5NWQ5NDgzNzhlMWU3MGQ5NTUyYTZlZmE6NjQ4OGE5MzU3MWViNGRkODhjOTkzNDQ0YTdmNGM3NWM=',
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  });
-
-  const response = await data.json();
-
-  return `${response.token_type} ${response.access_token}`;
+  window.location.href = `https://accounts.spotify.com/authorize?${paramString}`;
 }
 
 ( async function getData() {
