@@ -1,5 +1,4 @@
-import encodeParams from "./encodeParams.js";
-import randSample from "./randomFromArray.js";
+import auth from "./authentication.js";
 
 const carousel = new Flickity('.carousel__track', {
   // options
@@ -12,24 +11,6 @@ const carousel = new Flickity('.carousel__track', {
   initialIndex: '.is-initial-select'
 });
 
-async function auth() {
-  const paramString = encodeParams({
-    'grant_type': 'client_credentials'
-  });
-
-  const data = await fetch('https://accounts.spotify.com/api/token', {
-    method: 'POST',
-    body: paramString,
-    headers: {
-      'Authorization': 'Basic MjYyNTNlOWY5NWQ5NDgzNzhlMWU3MGQ5NTUyYTZlZmE6NjQ4OGE5MzU3MWViNGRkODhjOTkzNDQ0YTdmNGM3NWM=',
-      'Content-Type': 'application/x-www-form-urlencoded'
-    }
-  });
-
-  const response = await data.json();
-
-  return `${response.token_type} ${response.access_token}`;
-}
 
 (async function doThings() {
   const token = await auth();

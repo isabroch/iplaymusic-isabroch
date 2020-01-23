@@ -9,7 +9,18 @@
 
     <ul class="carousel__track">
 
-
+      <li class="carousel__cell" data-id="">
+        <div class="ratio ratio_square carousel__cell-content"><img src="" data-lazysrc="http://placekitten.com/200/300?image=1" alt="" class="ratio__img carousel__cell-image"></div>
+      </li>
+      <li class="carousel__cell" data-id="">
+        <div class="ratio ratio_square carousel__cell-content"><img src="" data-lazysrc="http://placekitten.com/200/300?image=1" alt="" class="ratio__img carousel__cell-image"></div>
+      </li>
+      <li class="carousel__cell" data-id="">
+        <div class="ratio ratio_square carousel__cell-content"><img src="" data-lazysrc="http://placekitten.com/200/300?image=1" alt="" class="ratio__img carousel__cell-image"></div>
+      </li>
+      <li class="carousel__cell" data-id="">
+        <div class="ratio ratio_square carousel__cell-content"><img src="" data-lazysrc="http://placekitten.com/200/300?image=1" alt="" class="ratio__img carousel__cell-image"></div>
+      </li>
 
     </ul>
 
@@ -21,18 +32,69 @@
     <ol class="playlist-info__track-list">
       <li class="playlist-info__track track">
         <a href="" class="track__link">
-          <button class="track__play"></button>
+
+          <button class="track__play"><i class="fas fa-play"></i></button>
+          <div class="track__title">Song Name</div>
+          <div class="track__artist">Diddley Doo</div>
+          <div class="track__time">4:09</div>
+
+        </a>
+      </li>
+
+      <li class="playlist-info__track track">
+        <a href="" class="track__link">
+
+          <button class="track__play"><i class="fas fa-play"></i></button>
+          <div class="track__title">Song Name</div>
+          <div class="track__artist">Diddley Doo</div>
+          <div class="track__time">4:09</div>
+
+        </a>
+      </li>
+
+      <li class="playlist-info__track track">
+        <a href="" class="track__link">
+
+          <button class="track__play"><i class="fas fa-play"></i></button>
+          <div class="track__title">Song Name</div>
+          <div class="track__artist">Diddley Doo</div>
+          <div class="track__time">4:09</div>
 
         </a>
       </li>
     </ol>
+
+    <button class="playlist-info__listen">Listen All</button>
   </article>
 </main>
 
 <template id="carousel-cell">
   <li class="carousel__cell" data-id="">
-    <div class="ratio ratio_square carousel__cell-content"><img src="http://placekitten.com/200/300?image=1" data-lazysrc="" alt="" class="ratio__img carousel__cell-image"></div>
+    <div class="ratio ratio_square carousel__cell-content"><img src="" data-lazysrc="http://placekitten.com/200/300?image=1" alt="" class="ratio__img carousel__cell-image"></div>
   </li>
+</template>
+
+<template id="playlist-info">
+  <h1 class="playlist-info__title"></h1>
+
+    <ol class="playlist-info__track-list">
+
+    </ol>
+
+    <button class="playlist-info__listen">Listen All</button>
+
+    <template id="track">
+      <li class="playlist-info__track track">
+        <a href="" class="track__link">
+
+          <button class="track__play"><i class="fas fa-play"></i></button>
+          <div class="track__title"></div>
+          <div class="track__artist"></div>
+          <div class="track__time"></div>
+
+        </a>
+      </li>
+    </template>
 </template>
 
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js" defer></script>
