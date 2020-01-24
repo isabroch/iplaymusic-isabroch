@@ -62,20 +62,31 @@
     list-style: none;
   }
 
-  &__listen {}
+  &__listen {
+    width: 100%;
+    background: none;
+    border: 3px solid $color-primary;
+    border-radius: 50px;
+    min-height: 3.5rem;
+    color: $color-primary;
+    @include typography(h6);
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-family: inherit;
+  }
 }
 
 .track {
   display: grid;
   grid-template-columns: auto 1fr auto;
-  grid-gap: 0 1rem;
+  grid-gap: 0.2rem 1rem;
   align-items: center;
   grid-template-areas:
   "play title detail"
   "play artist detail";
   position: relative;
 
-  margin-bottom: 1rem;
+  margin-bottom: 1.25rem;
   &:last-of-type {
     margin-bottom: 3rem;
   }
