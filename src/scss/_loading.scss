@@ -1,0 +1,14 @@
+.loading {
+  border: 0.5rem solid rgba($color-primary, 0.2);
+  border-top: 0.5rem solid $color-primary;
+  border-radius: 50%;
+  width: 5rem;
+  height: 5rem;
+  margin: 10vh auto;
+  animation: spin 1.25s cubic-bezier(.79,.14,.15,.86) infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}

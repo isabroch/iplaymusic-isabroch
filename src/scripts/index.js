@@ -1,6 +1,7 @@
 // Imports
 import observe from "./observe.js";
 import auth from "./authentication.js";
+import loading from "./loading.js";
 
 // FETCH
 ( async function getData() {
@@ -32,9 +33,10 @@ import auth from "./authentication.js";
 } )();
 
 function createCards(items) {
+  const cardContainer = document.querySelector('.featured-card-grid');
+  const cardTemplate = document.querySelector('#feature-card');
+
   for (const item of items) {
-    const cardContainer = document.querySelector('.featured-card-grid');
-    const cardTemplate = document.querySelector('#feature-card');
     const cardClone = cardTemplate.content.cloneNode(true);
 
     const cardFields = ['.feature-card__title', '.feature-card__type', '.feature-card__link', '.feature-card__background'].map(query => cardClone.querySelector(query));
@@ -46,6 +48,8 @@ function createCards(items) {
 
     cardContainer.appendChild(cardClone);
   }
+
+  loading.end(cardContainer);
 
   observe(
     ['.feature-card__background'],
