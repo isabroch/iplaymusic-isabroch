@@ -98,11 +98,9 @@ function createCarousel(playlists) {
     on: {
       ready: function () {
         lazyload();
+        loadNewPlaylist(this);
       },
       change: function() {
-        loading.start(document.querySelector('.playlist-info'));
-      },
-      settle: function() {
         loadNewPlaylist(this);
       }
     }
@@ -119,6 +117,8 @@ function playlistToUrl(id, name) {
 }
 
 async function loadNewPlaylist(el) {
+  loading.start(document.querySelector('.playlist-info'));
+
   const [id, name] = [
     el.selectedElement.dataset.playlistId,
     el.selectedElement.playlistName
