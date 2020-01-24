@@ -1,4 +1,4 @@
-( function colorMode(selector) {
+(function colorMode(selector) {
   function colorMode(toggle = false) {
     let mode = localStorage.getItem('colorMode');
 
@@ -32,3 +32,17 @@
   return colorMode(false);
 })('.js-toggle-colormode');
 
+
+(function backButton() {
+  const button = document.querySelector('#goBack');
+
+  if (button) {
+    document.querySelector('#goBack').addEventListener('click', function (e) {
+      console.log(window.location.origin);
+
+      const history = window.history.back();
+
+      console.log(history);
+    })
+  }
+})()
