@@ -1,4 +1,34 @@
-// Imports
-import toggleColorMode from "./toggleColorMode.js";
+( function colorMode(selector) {
+  function colorMode(toggle = false) {
+    let mode = localStorage.getItem('colorMode');
 
-toggleColorMode('.js-toggle-colormode');
+    if (!mode) {
+      mode = 'dark'
+    };
+
+    if (toggle) {
+      switch (mode) {
+        case 'dark':
+          mode = 'light';
+          break;
+
+        case 'light':
+          mode = 'dark';
+          break;
+      }
+    }
+
+    localStorage.setItem('colorMode', mode)
+
+    document.querySelector('body').dataset.colormode = `${mode}`;
+
+    return mode;
+  }
+
+  document.querySelector(selector).addEventListener('click', () => {
+    colorMode(true);
+  })
+
+  return colorMode(false);
+})('.js-toggle-colormode');
+
