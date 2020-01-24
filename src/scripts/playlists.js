@@ -174,7 +174,7 @@ function createPlaylistInfo(playlistName, tracks){
 
     const [link, title, artist, mins, secs] = ['.track__link', '.track__title', '.track__artist', '.track__min', '.track__sec'].map(query => trackTemplate.querySelector(query));
 
-    link.href = `?songId=${track.id}`;
+    link.href = `/player?song=${track.id}`;
 
     title.textContent = track.name;
     artist.textContent = track.artist;
