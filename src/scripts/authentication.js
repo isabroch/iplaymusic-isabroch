@@ -1,12 +1,28 @@
 import encodeParams from "./encodeParams.js";
 
 export default function auth() {
-  if (window.localStorage.getItem('token')) {
-    const authentication = window.localStorage.getItem('token');
 
-    return authentication;
+  let localToken = window.localStorage.getItem('token');
+
+  if (localToken === null) {
+    return triggerAuth();
   }
 
+  let localTokenObject = JSON.parse(localToken);
+
+  const tokenTimestamp = new Date(localTokenObject.expires);
+  const currentTimestamp = new Date();
+
+  /* check time of expiration, if expired, create new token... else return token */
+  if (currentTimestamp < tokenTimestamp) {
+    return localTokenObject.token;
+  } else {
+    return triggerAuth();
+  }
+
+};
+
+function triggerAuth() {
   const paramString = encodeParams({
     'client_id': '26253e9f95d948378e1e70d9552a6efa',
     'response_type': 'token',
@@ -18,4 +34,4 @@ export default function auth() {
   window.localStorage.setItem('triggerPage', pageTriggeringAuth);
 
   window.location =`https://accounts.spotify.com/authorize?${paramString}`;
-};
+}

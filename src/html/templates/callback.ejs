@@ -5,8 +5,16 @@
   // calling spotify api requires authetnication
   const authentication = `${params.get('token_type')} ${params.get('access_token')}`;
 
+  let timestamp = new Date();
+
+  console.log(timestamp, timestamp.getSeconds(), parseInt(params.get('expires_in')), timestamp.getSeconds() + parseInt(params.get('expires_in')));
+
+  timestamp.setSeconds( timestamp.getSeconds() + parseInt(params.get('expires_in')) );
+
+  const localToken = { token: authentication, expires: timestamp };
+
   // create local storage item to remember token
-  window.localStorage.setItem('token', authentication)
+  window.localStorage.setItem('token', JSON.stringify(localToken));
 
   // 'cleans' the url
   window.location.href = window.localStorage.getItem('triggerPage')
