@@ -8,7 +8,7 @@
 .carousel {
   width: 100vw;
   margin-left: ($padSide * -1);
-  margin-bottom: 25px;
+  margin-bottom: 0.75rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -44,5 +44,75 @@
     &.is-selected {
       transform: scale(1);
     }
+  }
+}
+
+.playlist-info {
+  margin: 0 ($padSide * -1);
+  background-color: var(--color-background);
+  padding: 0.25rem $padSide 0;
+
+  &__title {
+    @include typography(h5);
+    text-align: center;
+    margin-bottom: 2rem;
+  }
+
+  &__list {
+    list-style: none;
+  }
+
+  &__listen {}
+}
+
+.track {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  grid-gap: 0 1rem;
+  align-items: center;
+  grid-template-areas:
+  "play title detail"
+  "play artist detail";
+  position: relative;
+
+  margin-bottom: 1rem;
+  &:last-of-type {
+    margin-bottom: 3rem;
+  }
+
+  &__link {
+    display: contents;
+    color: var(--color-text);
+  }
+
+  &__play {
+    grid-area: play;
+    height: 2rem;
+    width: 2rem;
+    border-radius: 100%;
+    justify-self: end;
+    border: none;
+    background: linear-gradient(to right, $gradient-red);
+    color: var(--color-text);
+
+    @include typography(xs);
+  }
+
+  &__detail {
+    grid-area: detail;
+    text-align: right;
+    justify-self: start;
+    @include typography(s)
+  }
+
+  &__title {
+    grid-area: title;
+    @include typography(h6);
+    @extend %oneline;
+  }
+  &__artist {
+    grid-area: artist;
+    @include typography(s);
+    @extend %oneline;
   }
 }
