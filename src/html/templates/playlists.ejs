@@ -14,44 +14,7 @@
   </div>
 
   <article class="playlist-info">
-    <h1 class="playlist-info__title">Top 50 Rock Ballads</h1>
-
-    <ol class="playlist-info__list">
-      <li class="playlist-info__list-track track">
-        <a href="" class="track__link">
-
-          <button class="track__play"><i class="fas fa-play"></i></button>
-          <div class="track__title">Song Name</div>
-          <div class="track__artist">Diddley Doo</div>
-          <div class="track__detail">4:09</div>
-
-        </a>
-      </li>
-
-      <li class="playlist-info__list-track track">
-        <a href="" class="track__link">
-
-          <button class="track__play"><i class="fas fa-play"></i></button>
-          <div class="track__title">Song Name</div>
-          <div class="track__artist">Diddley Doo</div>
-          <div class="track__detail">4:09</div>
-
-        </a>
-      </li>
-
-      <li class="playlist-info__list-track track">
-        <a href="" class="track__link">
-
-          <button class="track__play"><i class="fas fa-play"></i></button>
-          <div class="track__title">Song Name</div>
-          <div class="track__artist">Diddley Doo</div>
-          <div class="track__detail">4:09</div>
-
-        </a>
-      </li>
-    </ol>
-
-    <button class="playlist-info__listen">Listen All</button>
+    <div class="loading"></div>
   </article>
 </main>
 
@@ -64,24 +27,26 @@
 <template id="playlist-info">
   <h1 class="playlist-info__title"></h1>
 
-    <ol class="playlist-info__list">
+  <ol class="playlist-info__list">
 
-    </ol>
+  </ol>
 
-    <button class="playlist-info__listen">Listen All</button>
+  <button class="playlist-info__listen">Listen All</button>
 
-    <template id="track">
-      <li class="playlist-info__list-track track">
-        <a href="" class="track__link">
+  <template id="track">
+    <li class="playlist-info__list-track track">
+      <a href="" class="track__link">
 
-          <button class="track__play"><i class="fas fa-play"></i></button>
-          <div class="track__title"></div>
-          <div class="track__artist"></div>
-          <div class="track__detail"></div>
+        <button class="track__play"><i class="fas fa-play"></i></button>
+        <div class="track__title"></div>
+        <div class="track__artist"></div>
+        <div class="track__detail">
+          <span class="track__min"></span><span class="track__colon">:</span><span class="track__sec"></span>
+        </div>
 
-        </a>
-      </li>
-    </template>
+      </a>
+    </li>
+  </template>
 </template>
 
 <script src="https://unpkg.com/flickity@2/dist/flickity.pkgd.min.js"></script>

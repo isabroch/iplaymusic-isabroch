@@ -1,8 +1,9 @@
 import auth from "./authentication.js";
 import observe from "./observe.js";
+import loading from "./loading.js";
 
 
-const getAllPlaylists = async function () {
+async function getAllPlaylists() {
   const token = await auth();
 
   xfetch.init({
@@ -57,11 +58,8 @@ const getAllPlaylists = async function () {
   return playlists;
 }
 
-
-// TODO: create playlist carousel
-
-const createCarousel = function (playlists) {
-  const lazyload = function() {
+function createCarousel(playlists) {
+  const lazyload = function () {
     observe(
       ['.carousel__cell-image'],
       function (el) {
@@ -82,6 +80,7 @@ const createCarousel = function (playlists) {
       cellElement.classList.add('is-initial-select');
     }
     cellElement.dataset.playlistId = id;
+    cellElement.dataset.playlistName = playlists[id].name;
     cellImage.dataset.lazysrc = playlists[id].img;
     cellImage.alt = playlists[id].name;
 
@@ -97,70 +96,104 @@ const createCarousel = function (playlists) {
     pageDots: false,
     initialIndex: '.is-initial-select',
     on: {
-      ready: lazyload()
+      ready: function () {
+        lazyload();
+      },
+      change: function() {
+        loading.start(document.querySelector('.playlist-info'));
+      },
+      settle: function() {
+        loadNewPlaylist(this);
+      }
     }
   });
 
   return carousel;
 }
 
+function playlistToUrl(id, name) {
+  const query = new URLSearchParams(window.location.search);
+  query.set('id', id);
+
+  window.history.replaceState({}, name, `?${query.toString()}`);
+}
+
+async function loadNewPlaylist(el) {
+  const [id, name] = [
+    el.selectedElement.dataset.playlistId,
+    el.selectedElement.playlistName
+  ]
+
+  playlistToUrl(id, name);
+
+  const playlist = getPlaylistDetails(id);
+  createPlaylistInfo(name, await playlist);
+}
+
+async function getPlaylistDetails(playlistId) {
+  const token = await auth();
+
+  xfetch.init({
+    address: "https://api.spotify.com/v1/",
+    key: token
+  });
+
+  const playlist = (await xfetch.get(`playlists/${playlistId}/tracks`)).items;
+
+  const tracks = playlist.map(entry => {
+    if (entry.track) {
+      const duration = new Date(parseInt(entry.track.duration_ms));
+      const [min, sec] = [
+        (duration.getUTCMinutes()).toString().padStart(2, '0'),
+        (duration.getUTCSeconds()).toString().padStart(2, '0')
+      ]
+
+      return {
+        name: entry.track.name,
+        artist: entry.track.artists[0].name,
+        id: entry.track.id,
+        duration: {min: min, sec: sec}
+      }
+    }
+  });
+
+  return tracks;
+}
+
+function createPlaylistInfo(playlistName, tracks){
+  const playlistTemplate = document.querySelector('#playlist-info').content.cloneNode(true);
+  const playlistContainer = document.querySelector('.playlist-info');
+
+  const playlistNameEl = playlistTemplate.querySelector('.playlist-info__title');
+
+  playlistNameEl.textContent = playlistName;
+
+  for (const track of tracks) {
+    const trackTemplate = playlistTemplate.querySelector('#track').content.cloneNode(true);
+    const trackContainer = playlistTemplate.querySelector('.playlist-info__list');
+
+    const [link, title, artist, mins, secs] = ['.track__link', '.track__title', '.track__artist', '.track__min', '.track__sec'].map(query => trackTemplate.querySelector(query));
+
+    link.href = `?songId=${track.id}`;
+
+    title.textContent = track.name;
+    artist.textContent = track.artist;
+    mins.textContent = track.duration.min;
+    secs.textContent = track.duration.sec;
+
+    trackContainer.appendChild(trackTemplate);
+  }
+
+  // clear playlist container, prevents accidentally appending list more than once - and removes loader
+  playlistContainer.innerHTML = '';
+
+  playlistContainer.appendChild(playlistTemplate);
+}
 
 //  Executing codes
 async function load() {
-
   const playlists = await getAllPlaylists();
   const carousel = createCarousel(playlists);
-
-  console.log(carousel);
-
 }
 
 load();
-
-
-/* PSUEDO CODE:
-
-//  GET DATA ON PAGE LOAD
-//    create playlists{} that holds playlistDetails (thumbnail, name)
-//
-//    get a list of all user's playlists
-//    ~ look at [me/playlists] @ https://developer.spotify.com/documentation/web-api/reference/playlists/get-a-list-of-current-users-playlists/
-//
-//    for each playlist, create playlists[id] with playlistDetails{}
-//
-//    if param ?id exists, get playlist
-//    ~ look at [playlists/{id}] @ https://developer.spotify.com/documentation/web-api/reference/playlists/get-playlist/
-//
-//    create playlists[?id] with playlistDetails{... current: true}
-
-  CREATE PLAYLIST CAROUSEL
-    for ${id} in playlists{}...
-      clone template #carousel-cell
-
-      set     .carousel__cell data-id     to    ${id}
-      set     .ratio__img data-lazysrc    to    ${playlists[id].img}
-      set     .ratio__img alt             to    ${playlists[id].name}
-
-      if ${playlists[id].current} is true,
-
-      set     .carousel__cell class       to    '.is-initial-select'
-
-      append to .carousel__track [https://flickity.metafizzy.co/api.html#append]
-
-    initialize carousel on .carousel__track
-    ~ see const carousel on line 4
-
-  ON CAROUSEL EVENTS
-    as per https://flickity.metafizzy.co/events.html
-
-    on change
-      clear
-
-    on settle
-
-
-
-
-
-
-*/
