@@ -14,8 +14,6 @@ import loading from "./loading.js";
 
   const playlists = (await xfetch.get(`search?q=%22music%22&type=playlist&limit=10`)).playlists.items;
 
-  console.log(playlists);
-
   const featuredItems = []
 
   for (const item of playlists) {
