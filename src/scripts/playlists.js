@@ -1,7 +1,8 @@
 import auth from "./authentication.js";
+import observe from "./observe.js";
 
 
-const getAllPlaylists = (async function() {
+const getAllPlaylists = async function () {
   const token = await auth();
 
   xfetch.init({
@@ -9,11 +10,15 @@ const getAllPlaylists = (async function() {
     key: token
   });
 
-  const createPlaylistObject = function(data, current = false) {
+  const createPlaylistObject = function (data, current = false) {
     const playlists = {};
 
     const createPlaylistItem = (item) => {
-      playlists[item.id] = {name: item.name, img: item.images[0].url, current: current}
+      playlists[item.id] = {
+        name: item.name,
+        img: item.images[0].url,
+        current: current
+      }
     }
 
     for (const playlist of data) {
@@ -23,16 +28,16 @@ const getAllPlaylists = (async function() {
     return playlists;
   }
 
-  const getUserPlaylists = async function() {
+  const getUserPlaylists = async function () {
     const userPlaylists = (await xfetch.get(`me/playlists`)).items;
 
     return createPlaylistObject(userPlaylists);
   }
 
-  const getPagePlaylist = async function() {
+  const getPagePlaylist = async function () {
     const pagePlaylistId = new URLSearchParams(window.location.search).get('id');
 
-    if(pagePlaylistId) {
+    if (pagePlaylistId) {
       const pagePlaylist = (await xfetch.get(`playlists/${pagePlaylistId}`));
 
       return createPlaylistObject([pagePlaylist], true);
@@ -44,10 +49,73 @@ const getAllPlaylists = (async function() {
   const userPlaylists = await getUserPlaylists();
   const pagePlaylist = await getPagePlaylist();
 
-  const playlists = {...userPlaylists, ...pagePlaylist};
+  const playlists = {
+    ...userPlaylists,
+    ...pagePlaylist
+  };
 
   return playlists;
-})();
+}
+
+
+// TODO: create playlist carousel
+
+const createCarousel = function (playlists) {
+  const lazyload = function() {
+    observe(
+      ['.carousel__cell-image'],
+      function (el) {
+        el.src = el.dataset.lazysrc;
+      },
+      true,
+      '0px 0px 50% 0px'
+    )
+  };
+
+  for (const id in playlists) {
+    const cell = document.querySelector('#carousel-cell').content.cloneNode(true);
+    const carousel = document.querySelector('.carousel__track');
+
+    const [cellElement, cellImage] = ['.carousel__cell', '.carousel__cell-image'].map(query => cell.querySelector(query));
+
+    if (playlists[id].current) {
+      cellElement.classList.add('is-initial-select');
+    }
+    cellElement.dataset.playlistId = id;
+    cellImage.dataset.lazysrc = playlists[id].img;
+    cellImage.alt = playlists[id].name;
+
+    carousel.appendChild(cell);
+  }
+
+  const carousel = new Flickity('.carousel__track', {
+    cellAlign: 'center',
+    contain: true,
+    wrapAround: true,
+    imagesLoaded: true,
+    prevNextButtons: false,
+    pageDots: false,
+    initialIndex: '.is-initial-select',
+    on: {
+      ready: lazyload()
+    }
+  });
+
+  return carousel;
+}
+
+
+//  Executing codes
+async function load() {
+
+  const playlists = await getAllPlaylists();
+  const carousel = createCarousel(playlists);
+
+  console.log(carousel);
+
+}
+
+load();
 
 
 /* PSUEDO CODE:
@@ -70,7 +138,7 @@ const getAllPlaylists = (async function() {
       clone template #carousel-cell
 
       set     .carousel__cell data-id     to    ${id}
-      set     .ratio__img data-lazysrc    to    ${playlists[id].thumbnail}
+      set     .ratio__img data-lazysrc    to    ${playlists[id].img}
       set     .ratio__img alt             to    ${playlists[id].name}
 
       if ${playlists[id].current} is true,
