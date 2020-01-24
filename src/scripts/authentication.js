@@ -26,7 +26,8 @@ function triggerAuth() {
   const paramString = encodeParams({
     'client_id': '26253e9f95d948378e1e70d9552a6efa',
     'response_type': 'token',
-    'redirect_uri': 'http://localhost:8080/callback'
+    'redirect_uri': 'http://localhost:8080/callback',
+    'scope': ['playlist-read-collaborative', 'playlist-read-private', 'user-top-read', 'user-read-recently-played', 'user-library-read', 'user-follow-read'].join(' ')
   });
 
   const pageTriggeringAuth = window.location.href;
