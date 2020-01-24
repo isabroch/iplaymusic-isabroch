@@ -54,7 +54,6 @@ function featuredAlbums(albums) {
   observe(
     ['.thumbnails__item-img'],
     function (el) {
-      console.log(el);
       el.src = el.dataset.lazysrc;
     },
     true,
