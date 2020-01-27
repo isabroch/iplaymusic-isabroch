@@ -46,6 +46,8 @@ Afspilleren og album details er dybe links fra henholdsvis albums og playlists/a
 ## Tidsramme
 Der er afsat 1 arbejds uge til opgaven, dvs aflevering på fredag kl 13.30 (den sidste commit til github inden fredag kl 13.30, bliver afleveringen).
 
+---
+
 # Del 2 - API og Data implementering
 
 Anden del af projektet handler om få præsenteret rigtige data i iPlayMusic.
@@ -92,6 +94,8 @@ fetch-wrapper (Jeres eget ```npm``` modul)
 
 ## Tidsramme
 Der er afsat 1 arbejds uge til opgaven, dvs aflevering på fredag kl 13.30 (den sidste commit til github inden fredag kl 13.30, bliver afleveringen).
+
+---
 
 # Del 3 - Afspiller og animationer
 
