@@ -3,6 +3,22 @@
 <%- include('../partials/navigation', {title: 'Playing', search: false, back: true, active: false}) %>
 
 <main class="wrapper">
+  <div class="album-img"></div>
+  <div class="artist-img"></div>
+  <div class="song-name"></div>
+  <div class="artist"></div>
+
+  <div class="progress-bar">
+    <progress class="song-progress" value="" max=""></progress> <!-- Value is current timestamp in seconds. Max is current timestamp in seconds. -->
+  </div>
+
+  <div class="controls">
+    <button class="skip-backward"></button>
+    <button class="scrub-backward"></button>
+    <button class="play" data-isPlaying="false"></button>
+    <button class="scrub-forward"></button>
+    <button class="skip-forward"></button>
+  </div>
 </main>
 
 <%- include('../partials/doc-end', {file: ''}) %>
