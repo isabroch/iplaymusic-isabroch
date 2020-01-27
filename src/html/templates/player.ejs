@@ -1,24 +1,37 @@
-<%- include('../partials/doc-start', {title: 'Playing...'}) %>
+<%- include('../partials/doc-start', {title: 'Playing...', bodyClass: '_no-bot-nav', resources: ['<script src="https://sdk.scdn.co/spotify-player.js"></script>']}) %>
 
 <%- include('../partials/navigation', {title: 'Playing', search: false, back: true, active: false}) %>
 
 <main class="wrapper">
-  <div class="album-img"></div>
-  <div class="artist-img"></div>
+  <img class="album-img" src="http://placehold.it/300">
+  <div class="artist-img">
+    <div class="ratio ratio--square ratio--circle artist-img__image">
+      <img class="ratio__img" src="http://placehold.it/300" width="300" height="300">
+    </div>
+    <div class="artist-img__pulse pulse">
+      <div class="pulse__ring" style="--pulse-no: 0;"></div>
+      <div class="pulse__ring" style="--pulse-no: 1;"></div>
+    </div>
+  </div>
   <div class="song-name"></div>
   <div class="artist"></div>
 
-  <div class="progress-bar">
-    <progress class="song-progress" value="" max=""></progress> <!-- Value is current timestamp in seconds. Max is current timestamp in seconds. -->
+  <div class="song-progress">
+    <div class="song-progress__control" style="--ts-current: 30; --ts-max: 180">
+      <progress class="song-progress__bar" value="30" max="180"></progress> <!-- Value is current timestamp in seconds. Max is current timestamp in seconds. -->
+      <div class="song-progress__scrubber"></div>
+    </div>
+    <div class="song-progress__timestamp song-progress__timestamp--curent">0:00</div>
+    <div class="song-progress__timestamp song-progress__timestamp--max">0:00</div>
   </div>
 
   <div class="controls">
-    <button class="skip-backward"></button>
-    <button class="scrub-backward"></button>
-    <button class="play" data-isPlaying="false"></button>
-    <button class="scrub-forward"></button>
-    <button class="skip-forward"></button>
+    <button class="controls__icon controls__icon--skip-backward"></button>
+    <button class="controls__icon controls__icon--scrub-backward"></button>
+    <button class="controls__icon controls__icon--play" data-isPlaying="false"></button>
+    <button class="controls__icon controls__icon--scrub-forward"></button>
+    <button class="controls__icon controls__icon--skip-forward"></button>
   </div>
 </main>
 
-<%- include('../partials/doc-end', {file: ''}) %>
+<%- include('../partials/doc-end', {file: 'player'}) %>

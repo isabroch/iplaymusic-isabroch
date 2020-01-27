@@ -3,8 +3,12 @@
   overflow: hidden;
   width: 100%;
 
-  &_square {
+  &--square {
     padding-top: 100%;
+  }
+
+  &--circle {
+    border-radius: 50%;
   }
 
   &__img {

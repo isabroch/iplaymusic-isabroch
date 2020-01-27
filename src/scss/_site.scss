@@ -18,6 +18,11 @@ body {
   color: var(--color-text);
 }
 
+._no-bot-nav {
+  height: calc(100% - 70px);
+  margin: 70px 0 0 0;
+}
+
 ._no-scrollbar {
   // hide scrollbar
   -ms-overflow-style: none;

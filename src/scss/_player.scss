@@ -1,0 +1,181 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+}
+
+.album-img {
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  z-index: -1;
+  opacity: 0.5;
+}
+
+.artist-img {
+  width: 100%;
+  margin: auto;
+  padding: 15%;
+  position: relative;
+
+  &__image {
+    z-index: 1;
+  }
+
+  &__pulse {
+    --gradient-point: 80%;
+    z-index: 0;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    position: absolute;
+  }
+}
+
+.pulse__ring {
+  --pulse-duration: 2s;
+  --pulses: 2;
+  --pulse-no: 0;
+  --pulse-delay: calc((var(--pulse-duration) / var(--pulses)) * var(--pulse-no));
+  position: absolute;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  border-radius: 50%;
+  margin: auto;
+  background-color: $color-primary;
+  animation-name: pulse;
+  animation-timing-function: cubic-bezier(0,.75,1,.83);;
+  animation-direction: forwards;
+  animation-iteration-count: infinite;
+  animation-fill-mode: both;
+  animation-duration: var(--pulse-duration);
+  animation-delay: var(--pulse-delay);
+  width: 100%;
+  height: 100%;
+}
+
+@keyframes pulse {
+  0% {
+    transform: scale(0.7);
+    opacity: 1;
+  }
+
+  100% {
+    transform: scale(1);
+    opacity: 0;
+  }
+}
+
+.song-progress {
+  margin-top: auto;
+
+  &__bar {
+    appearance: none;
+    -webkit-appearance: none;
+    -moz-appearance: none;
+
+    border: none;
+    height: 3px;
+    width: 100%;
+    display: block;
+
+    background: $color-primary;
+
+    &::-webkit-progress-bar {
+      background: $color-primary;
+    }
+
+    &::-webkit-progress-value {
+      background-color: red;
+      background-image: linear-gradient(to right, $gradient-red);
+    }
+
+    &::-moz-progress-bar {
+      background-color: red;
+      background-image: linear-gradient(to right, $gradient-red);
+    }
+  }
+
+  &__control {
+    position: relative;
+  }
+
+  &__scrubber {
+    --size: 1em;
+    position: absolute;
+    width: var(--size);
+    height: var(--size);
+    background: #ff00ff;
+    border-radius: 50%;
+    top: calc((var(--size) - 3px) / 2 * -1);
+    left: calc((var(--ts-current) / var(--ts-max) * 100%) - (var(--size) / 2));
+  }
+}
+
+.controls {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+
+  &__icon {
+    cursor: pointer;
+    background: none;
+    border: none;
+    color: $color-secondary-light;
+    margin: 0 0.5rem;
+    padding: 0.5rem;
+
+    &::before {
+      display: inline-block;
+      font-style: normal;
+      font-variant: normal;
+      text-rendering: auto;
+      -webkit-font-smoothing: antialiased;
+      font-family: "Font Awesome 5 Pro";
+      font-weight: 900;
+      width: 1.25em;
+      text-align: center;
+      line-height: 1;
+      content: var(--icon);
+    }
+
+    &--play {
+      font-size: 3em;
+      color: $color-primary;
+      @include gradientClip;
+
+      &[data-isPlaying="false"]::before {
+        --icon: '\f04b';
+      }
+
+      &[data-isPlaying="true"]::before {
+        --icon: '\f04c';
+      }
+    }
+
+    &--skip-backward::before {
+      --icon: '\f04a'
+    }
+
+    &--skip-forward::before {
+      --icon: '\f04e'
+    }
+
+    &--scrub-backward::before {
+      --icon: '\f048'
+    }
+
+    &--scrub-forward::before {
+      --icon: '\f051'
+    }
+  }
+}
