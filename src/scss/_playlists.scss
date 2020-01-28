@@ -74,6 +74,10 @@
     letter-spacing: 0.25em;
     text-transform: uppercase;
     font-family: inherit;
+    display: flex;
+    text-decoration: none;
+    align-items: center;
+    justify-content: center;
   }
 }
 
@@ -83,11 +87,12 @@
   grid-gap: 0.2rem 1rem;
   align-items: center;
   grid-template-areas:
-  "play title detail"
-  "play artist detail";
+    "play title detail"
+    "play artist detail";
   position: relative;
 
   margin-bottom: 1.25rem;
+
   &:last-of-type {
     margin-bottom: 3rem;
   }
@@ -126,6 +131,7 @@
     @include typography(h6);
     @extend %oneline;
   }
+
   &__artist {
     grid-area: artist;
     @include typography(s);

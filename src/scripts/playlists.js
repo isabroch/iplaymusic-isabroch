@@ -121,13 +121,13 @@ async function loadNewPlaylist(el) {
 
   const [id, name] = [
     el.selectedElement.dataset.playlistId,
-    el.selectedElement.playlistName
+    el.selectedElement.dataset.playlistName
   ]
 
   playlistToUrl(id, name);
 
   const playlist = getPlaylistDetails(id);
-  createPlaylistInfo(name, await playlist);
+  createPlaylistInfo(id, name, await playlist);
 }
 
 async function getPlaylistDetails(playlistId) {
@@ -152,7 +152,8 @@ async function getPlaylistDetails(playlistId) {
         name: entry.track.name,
         artist: entry.track.artists[0].name,
         id: entry.track.id,
-        duration: {min: min, sec: sec}
+        duration: {min: min, sec: sec},
+        uri: entry.track.uri
       }
     }
   });
@@ -160,13 +161,16 @@ async function getPlaylistDetails(playlistId) {
   return tracks;
 }
 
-function createPlaylistInfo(playlistName, tracks){
+function createPlaylistInfo(playlistId, playlistName, tracks){
   const playlistTemplate = document.querySelector('#playlist-info').content.cloneNode(true);
   const playlistContainer = document.querySelector('.playlist-info');
 
   const playlistNameEl = playlistTemplate.querySelector('.playlist-info__title');
+  const playlistButtonEl = playlistTemplate.querySelector('.playlist-info__listen');
 
   playlistNameEl.textContent = playlistName;
+  playlistButtonEl.href = `${window.location.origin}/player/?playlist=${playlistId}`;
+
 
   for (const track of tracks) {
     const trackTemplate = playlistTemplate.querySelector('#track').content.cloneNode(true);
