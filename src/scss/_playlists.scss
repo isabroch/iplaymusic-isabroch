@@ -64,8 +64,11 @@
   }
 
   &__listen {
+    position: sticky;
+    bottom: 1rem;
     width: 100%;
-    background: none;
+    background: var(--color-background);
+    @include shadow(l);
     border: 3px solid $color-primary;
     border-radius: 50px;
     min-height: 3.5rem;
