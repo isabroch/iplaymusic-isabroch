@@ -1,4 +1,4 @@
-.wrapper {
+.player {
   display: flex;
   flex-direction: column;
   height: 100%;
@@ -13,8 +13,31 @@
   width: 100%;
   height: 100%;
   object-fit: cover;
-  z-index: -1;
-  filter: brightness(0.8);
+  transform: scale(1.05);
+  filter: brightness(0.5) blur(4px);
+
+  &[src=""] {
+    opacity: 0;
+  }
+
+  &-wrapper {
+    z-index: -1;
+
+    &:after {
+      content: '';
+      display: block;
+      position: absolute;
+      top: 0;
+      left: 0;
+      right: 0;
+      bottom: 0;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(to bottom, $gradient-red);
+      mix-blend-mode: screen;
+      opacity: 0.2;
+    }
+  }
 }
 
 .artist-img {
@@ -24,8 +47,16 @@
   padding: 2.5rem;
   position: relative;
 
-  &__image {
+  &__wrapper {
     z-index: 1;
+  }
+
+  &__image {
+    background: linear-gradient(to bottom, $gradient-red);
+
+    &[src=""] {
+      opacity: 0;
+    }
   }
 
   &__pulse {
@@ -40,7 +71,7 @@
 }
 
 .pulse__ring {
-  --pulse-duration: 2s;
+  --pulse-duration: 2.3s;
   --pulses: 2;
   --pulse-no: 0;
   --pulse-delay: calc((var(--pulse-duration) / var(--pulses)) * var(--pulse-no));
@@ -53,7 +84,8 @@
   margin: auto;
   background-color: $color-primary;
   animation-name: pulse;
-  animation-timing-function: cubic-bezier(0,.75,1,.83);;
+  animation-timing-function: cubic-bezier(0, .75, 1, .83);
+  ;
   animation-direction: forwards;
   animation-iteration-count: infinite;
   animation-fill-mode: both;
@@ -62,11 +94,11 @@
   width: 100%;
   height: 100%;
 
-  [data-is-playing="false"] & {
+  [data-is-paused="true"] & {
     animation-play-state: paused;
   }
 
-  [data-is-playing="true"] & {
+  [data-is-paused="false"] & {
     animation-play-state: running;
   }
 }
@@ -91,8 +123,13 @@
     color: $color-secondary-light;
     display: block;
 
-    &--name { @include typography(h5) }
-    &--artist { @include typography(m) }
+    &--name {
+      @include typography(h5)
+    }
+
+    &--artist {
+      @include typography(m)
+    }
   }
 }
 
@@ -105,13 +142,12 @@
     appearance: none;
     -webkit-appearance: none;
     -moz-appearance: none;
-
     border: none;
     height: 3px;
     width: 100%;
     display: block;
-
-    margin-bottom: 0.75rem;
+    padding: 0.75rem 0;
+    background: none;
 
     &::-webkit-progress-bar {
       background: $color-primary;
@@ -198,11 +234,11 @@
         @include gradientClip;
       }
 
-      [data-is-playing="false"] &::before {
+      [data-is-paused="true"] &::before {
         --icon: '\f04b';
       }
 
-      [data-is-playing="true"] &::before {
+      [data-is-paused="false"] &::before {
         --icon: '\f04c';
       }
     }

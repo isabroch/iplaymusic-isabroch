@@ -2,11 +2,13 @@
 
 <%- include('../partials/navigation', {title: 'Playing', search: false, back: true, active: false, stayWhite: true}) %>
 
-<main class="wrapper" data-is-playing="false">
-  <img class="album-img" src="http://placehold.it/300">
+<main class="wrapper player" data-is-paused="true">
+  <div class="album-img-wrapper">
+    <img class="album-img" src="">
+  </div>
   <div class="artist-img">
-    <div class="ratio ratio--square ratio--circle artist-img__image">
-      <img class="ratio__img" src="http://placehold.it/300" width="300" height="300">
+    <div class="ratio ratio--square ratio--circle artist-img__wrapper">
+      <img class="ratio__img artist-img__image" src="" width="300" height="300">
     </div>
     <div class="artist-img__pulse pulse">
       <div class="pulse__ring" style="--pulse-no: 0;"></div>
@@ -16,15 +18,17 @@
 
   <h1 class="song">
     <span class="song__detail song__detail--name">
-      Dance For Me
+      &nbsp;
     </span>
-    <span class="song__detail song__detail--artist">Never Seen Baby</span>
+    <span class="song__detail song__detail--artist">
+      &nbsp;
+    </span>
   </h1>
 
   <div class="song-progress">
-    <input type="range" class="song-progress__bar" value="30" max="180"> <!-- Value is current timestamp in seconds. Max is current timestamp in seconds. -->
-    <div class="song-progress__timestamp song-progress__timestamp--curent">0:30</div>
-    <div class="song-progress__timestamp song-progress__timestamp--max">3:00</div>
+    <input type="range" class="song-progress__bar" value="0" max="100"> <!-- Value is current timestamp in seconds. Max is current timestamp in seconds. -->
+    <div class="song-progress__timestamp song-progress__timestamp--curent">0:00</div>
+    <div class="song-progress__timestamp song-progress__timestamp--max">0:00</div>
   </div>
 
   <div class="controls">
