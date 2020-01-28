@@ -234,7 +234,7 @@
         @include gradientClip;
       }
 
-      [data-is-paused="true"] &::before {
+      [data-is-paused="true"] &::before, [data-is-paused="loading"] &::before {
         --icon: '\f04b';
       }
 
