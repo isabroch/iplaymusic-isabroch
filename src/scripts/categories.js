@@ -17,7 +17,7 @@ async function getAllFrom(resource) {
 (async () => {
   loading.start(document.querySelector('.category-list'));
 
-  const categories = (await getAllFrom('browse/categories')).categories.items;
+  const categories = (await getAllFrom('browse/categories?limit=50')).categories.items;
 
   const categoryMap = {};
 
