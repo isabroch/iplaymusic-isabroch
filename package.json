@@ -6,7 +6,8 @@
     "test": "echo \"Error: no test specified\" && exit 1",
     "dev": "gulp dev",
     "build": "npm i && gulp build",
-    "doc": "jsdoc -c jsdoc.json"
+    "doc": "jsdoc -c jsdoc.json",
+    "git": "git fetch upstream | git merge upstream/dev | git push"
   },
   "author": "Isabella Broch",
   "license": "MIT",
