@@ -1,42 +1,65 @@
-const genres = [
-  {name: 'Alternative', subgenres: ['Dark', 'Light']},
-  {name: 'Blues', subgenres: ['Dark', 'Light']},
-  {name: 'Classical', subgenres: ['Dark', 'Light']},
-  {name: 'Country', subgenres: ['Dark', 'Light']},
-  {name: 'Dance', subgenres: ['Dark', 'Light']},
-  {name: 'Electronic', subgenres: ['Dark', 'Light']},
-  {name: 'Fitness', subgenres: ['Dark', 'Light']},
-  {name: 'Hip-Hop', subgenres: ['Dark', 'Light']},
-  {name: 'Metal', subgenres: ['Heavy', 'Iron', 'Gold']},
-  {name: 'Pop', subgenres: ['Dark', 'Light']},
-  {name: 'Rock', subgenres: ['Dark', 'Light']}
-]
+import auth from "./authentication.js";
+import loading from "./loading.js";
 
-genres.forEach((genre) => {
-  createCategory(genre.name, genre.subgenres);
-})
+async function getAllFrom(resource) {
+  const token = await auth();
 
-function createCategory(genre, subgenres) {
-  const genreContainer = document.querySelector('.category-list');
-  const genreTemplate = document.querySelector('#category');
-  const genreClone = genreTemplate.content.cloneNode(true);
+  xfetch.init({
+    address: 'https://api.spotify.com/v1/',
+    key: token
+  });
 
-  const genreField = genreClone.querySelector('.category-list__item-title');
-  genreField.textContent = genre;
+  const data = await xfetch.get(resource);
 
-  const subGenreContainer = genreClone.querySelector('.category-list__sublist');
-  const subGenreTemplate = genreClone.querySelector('#category-item');
+  return data;
+}
 
-  for (const subgenre of subgenres) {
-    const subGenreClone = subGenreTemplate.content.cloneNode(true);
+(async () => {
+  loading.start(document.querySelector('.category-list'));
 
-    const subGenreField = subGenreClone.querySelector('.category-list__subitem-link');
+  const categories = (await getAllFrom('browse/categories')).categories.items;
 
-    subGenreField.href = `#${subgenre}`;
-    subGenreField.textContent = subgenre;
+  const categoryMap = {};
 
-    subGenreContainer.appendChild(subGenreClone);
+  for (const category of categories) {
+    const subCategories = (await getAllFrom(`browse/categories/${category.id}/playlists`)).playlists;
+
+    if (subCategories && subCategories.total > 0) {
+      categoryMap[category.id] = {
+        name: category.name,
+        subItems: subCategories.items
+      }
+    }
   }
 
-  genreContainer.appendChild(genreClone);
+  loading.end(document.querySelector('.category-list'))
+
+  for (const key in categoryMap) {
+    createCategory(categoryMap[key].name, categoryMap[key].subItems)
+  }
+})();
+
+function createCategory(category, subcategory) {
+  const itemContainer = document.querySelector('.category-list');
+  const itemTemplate = document.querySelector('#category');
+  const itemClone = itemTemplate.content.cloneNode(true);
+
+  const itemField = itemClone.querySelector('.category-list__item-title');
+  itemField.textContent = category;
+
+  const subItemContainer = itemClone.querySelector('.category-list__sublist');
+  const subItemTemplate = itemClone.querySelector('#category-item');
+
+  for (const subItem of subcategory) {
+    const subItemClone = subItemTemplate.content.cloneNode(true);
+
+    const subItemField = subItemClone.querySelector('.category-list__subitem-link');
+
+    subItemField.href = `/playlists/?id=${subItem.id}`;
+    subItemField.textContent = subItem.name;
+
+    subItemContainer.appendChild(subItemClone);
+  }
+
+  itemContainer.appendChild(itemClone);
 }
