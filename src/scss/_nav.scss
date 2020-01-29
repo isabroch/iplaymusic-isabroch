@@ -101,3 +101,58 @@
     }
   }
 }
+
+.search {
+  &__bar {
+    .navbar_light & {
+      --color-background: #{darken($color-primary, 10%)};
+    }
+
+    &-hider {
+      --offset: 17.5px;
+      height: 50%;
+      right: var(--offset);
+      overflow: hidden;
+      width: calc(100% - var(--offset) * 2);
+      position: absolute;
+      top: 25%;
+      transition: max-width ease 1s;
+
+      [data-search-is-open="true"] & {
+        max-width: 100vw;
+      }
+
+     [data-search-is-open="false"] & {
+        max-width: 0;
+      }
+    }
+
+    border-radius: 5px;
+    height: 100%;
+    padding: 0 2.15rem 0 0.7rem;
+    border: none;
+    line-height: 2;
+    width: 100%;
+    background-image: linear-gradient(to right, rgba(0, 0, 0, 0) 25%, var(--color-shadow) 180%);
+    background-color: var(--color-background);
+    color: var(--color-text);
+    box-shadow: inset 0px 0px 0px 1px $color-primary;
+  }
+
+  &__button {
+    position: relative;
+    z-index: 10;
+  }
+
+  &[data-search-is-open="true"] {
+    .search__openIcon {
+      display: none;
+    }
+  }
+
+  &[data-search-is-open="false"] {
+    .search__closeIcon {
+      display: none;
+    }
+  }
+}

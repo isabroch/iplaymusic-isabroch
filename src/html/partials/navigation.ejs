@@ -10,9 +10,16 @@
     <% } %>
 
 
-    <button aria-label="Search" class="navbar__link navbar__link_highlight <% if (!search) { %>hidden<% } %>">
-      <i class="fas fa-fw fa-search"></i>
-    </button>
+    <div class="search <% if (!search) { %>hidden<% } %>" data-search-is-open="true">
+      <div class="search__bar-hider">
+        <input type="search" name="searchQuery" class="search__bar" placeholder="Search...">
+      </div>
+
+      <button aria-label="Search" class="navbar__link navbar__link_highlight search__button">
+        <i class="fas fa-fw fa-search search__openIcon"></i>
+        <i class="fas fa-fw fa-times search__closeIcon"></i>
+      </button>
+    </div>
 
   </div>
 

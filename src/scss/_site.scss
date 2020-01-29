@@ -27,6 +27,7 @@ body {
   // hide scrollbar
   -ms-overflow-style: none;
   scrollbar-width: none;
+
   &::-webkit-scrollbar {
     display: none;
   }
@@ -34,4 +35,8 @@ body {
 
 .wrapper {
   padding: 0px $padSide 45px;
+}
+
+.fas {
+  pointer-events: none;
 }
