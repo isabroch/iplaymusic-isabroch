@@ -4,6 +4,24 @@ import loading from "./loading.js";
 
 const search = (async () => {
 
+  let throttleTimer;
+
+  const throttle = function (func, delay) {
+    // If setTimeout is already scheduled, no need to do anything
+    if (throttleTimer) {
+      return
+    }
+
+    // Schedule a setTimeout after delay seconds
+    throttleTimer = setTimeout(function () {
+      func()
+
+      // Once setTimeout function execution is finished, throttleTimer = undefined so that in <br>
+      // the next scroll event function execution can be scheduled by the setTimeout
+      throttleTimer = undefined;
+    }, delay)
+  };
+
   const search = document.querySelector('.search');
   search.results = document.querySelector('.search__result-list');
   search.resultsContainer = document.querySelector('.search__result-list-container');
@@ -33,8 +51,6 @@ const search = (async () => {
   });
 
   search.bar.addEventListener('input', async function (e) {
-    loading.start(search.results);
-
     if (this.value.length == '') {
       search.dataset.searchResultsShowing = 'false'
     } else {
@@ -48,15 +64,21 @@ const search = (async () => {
       3. Observe images for lazy loading
     */
 
-    const searchResults = await getResults(this.value);
+    const findNewResults = async () => {
+      loading.start(search.results);
 
-    loading.end(search.results);
+      const searchResults = await getResults(this.value);
 
-    for (const result of searchResults) {
-      pushResultToHtml(result);
+      loading.end(search.results);
+
+      for (const result of searchResults) {
+        pushResultToHtml(result);
+      }
+
+      lazyload();
     }
 
-    lazyload();
+    throttle(findNewResults, 600);
   })
 
   async function getResults(input) {
