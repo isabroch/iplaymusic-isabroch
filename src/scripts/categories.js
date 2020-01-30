@@ -19,6 +19,8 @@ async function getAllFrom(resource) {
 
   const categories = (await getAllFrom('browse/categories?limit=50')).categories.items;
 
+  console.log(categories);
+
   const categoryMap = {};
 
   for (const category of categories) {
@@ -31,6 +33,8 @@ async function getAllFrom(resource) {
       }
     }
   }
+
+  console.log(Object.keys(categoryMap).length, "properties in", categoryMap);
 
   loading.end(document.querySelector('.category-list'))
 
@@ -63,3 +67,21 @@ function createCategory(category, subcategory) {
 
   itemContainer.appendChild(itemClone);
 }
+
+
+/* PLAN TO OPTIMIZE THIS PAGE:
+
+Route 1:
+Load in all the categories and add them to page.
+THEN, load each category's playlists and add them to their element.
+Could implement lazy loading - don't start searching for the playlists until the header is on the page.
+Cannot use 'hover' because, if mobile, hover intent does not exist.
+
+Route 2:
+Create two variables (limit = 10 and offset = 0) //numbers not finalized
+Load in a limited number of categories and their playlists at a time (limit var)
+Each successful load increases [offset] by [limit]
+Append to page
+Restart process with the increased offset
+
+*/

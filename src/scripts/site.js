@@ -1,3 +1,5 @@
+import search from "./search.js"
+
 (function colorMode(selector) {
   function colorMode(toggle = false) {
     let mode = localStorage.getItem('colorMode');
@@ -46,3 +48,5 @@
     })
   }
 })()
+
+search;

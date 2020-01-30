@@ -10,28 +10,48 @@
     <% } %>
 
 
-    <button aria-label="Search" class="navbar__link navbar__link_highlight <% if (!search) { %>hidden<% } %>">
-      <i class="fas fa-fw fa-search"></i>
-    </button>
+    <div class="search <% if (!search) { %>hidden<% } %>" data-search-is-open="false" data-search-results-showing="false">
+      <div class="search__bar-hider">
+        <input type="search" name="searchQuery" class="search__bar" placeholder="Search...">
+      </div>
 
+      <button aria-label="Search" class="navbar__link navbar__link_highlight search__button">
+        <i class="fas fa-fw fa-search search__openIcon"></i>
+        <i class="fas fa-fw fa-times search__closeIcon"></i>
+      </button>
+
+      <div class="search__result-list-container">
+        <div class="search__result-list-background"></div>
+        <ul class="search__result-list">
+
+        </ul>
+      </div>
+    </div>
+
+    <template id="search-result">
+      <li class="search__result">
+        <img src="" data-lazysrc="" alt="" width="40" height="40" class="search__result-media"> <span class="search__result-title">A song name</span> <span class="search__result-detail">Song</span>
+        <a href="" class="search__result-link"></a>
+      </li>
+    </template>
   </div>
 
   <%# bottom bar navigation %>
-  <ul class="navbar navbar_bot <% if(!active) {%> hidden<% } %>" >
+  <ul class="navbar navbar_bot <% if(!active) {%> hidden<% } %>">
     <li><a href="/albums" aria-label="Albums" class="navbar__link <%= `${active === "albums" ? `navbar__link_highlight` : ''}` %>">
-      <i class="fab fa-fw fa-creative-commons-sampling"></i>
-    </a></licl>
+        <i class="fab fa-fw fa-creative-commons-sampling"></i>
+      </a></licl>
     <li><a href="/playlists" aria-label="Playlists" class="navbar__link <%= `${active === "playlists" ? `navbar__link_highlight` : ''}` %>">
-      <i class="fas fa-fw fa-microphone-alt"></i>
-    </a></li>
+        <i class="fas fa-fw fa-microphone-alt"></i>
+      </a></li>
     <li><a href="/" aria-label="Featured" class="navbar__link navbar__link_featured <%= `${active === "featured" ? `navbar__link_highlight` : ''}` %>">
-      <i class="fas fa-fw fa-podcast"></i>
-    </a></li>
+        <i class="fas fa-fw fa-podcast"></i>
+      </a></li>
     <li><button aria-label="Color Scheme" class="js-toggle-colormode navbar__link <%= `${active === "color scheme" ? `navbar__link_highlight` : ''}` %>">
-      <i class="fas fa-fw fa-adjust"></i>
-    </button></li>
+        <i class="fas fa-fw fa-adjust"></i>
+      </button></li>
     <li><a href="/categories" aria-label="Categories" class="navbar__link <%= `${active === "categories" ? `navbar__link_highlight` : ''}` %>">
-      <i class="fas fa-fw fa-cog"></i>
-    </a></li>
+        <i class="fas fa-fw fa-cog"></i>
+      </a></li>
   </ul>
 </nav>

@@ -226,6 +226,11 @@
       content: var(--icon);
     }
 
+    &--disabled {
+      opacity: 0.5;
+      pointer-events: none;
+    }
+
     &--play {
       font-size: 3em;
       color: $color-primary;

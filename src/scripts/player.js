@@ -45,6 +45,8 @@ window.onSpotifyWebPlaybackSDKReady = async () => {
       duration,
       position,
       track_window: {
+        next_tracks,
+        previous_tracks,
         current_track: {
           name,
           artists,
@@ -56,6 +58,23 @@ window.onSpotifyWebPlaybackSDKReady = async () => {
       }
     }) {
       window.history.replaceState({}, name, `?song=${id}`)
+
+      const [prevSongButton, nextSongButton] = [
+        document.querySelector('.controls__icon--skip-backward'),
+        document.querySelector('.controls__icon--skip-forward')
+      ]
+
+      if (next_tracks.length == 0) {
+        nextSongButton.classList.add('controls__icon--disabled')
+      } else {
+        nextSongButton.classList.remove('controls__icon--disabled')
+      }
+
+      if (previous_tracks.length == 0) {
+        prevSongButton.classList.add('controls__icon--disabled')
+      } else {
+        prevSongButton.classList.remove('controls__icon--disabled')
+      }
 
       audioPlayer.el.name.textContent = name;
       audioPlayer.el.artist.textContent = artists[0].name;
@@ -240,28 +259,22 @@ window.onSpotifyWebPlaybackSDKReady = async () => {
 
     if (playlistId) {
       const data = await xfetch.get(`playlists/${playlistId}`);
-      if ( data.hasOwnProperty('error') ) {
+      if (data.hasOwnProperty('error')) {
         window.location.href = window.location.origin;
       }
       queue = data.tracks.items.map(item => item.track.uri);
       play(device_id, queue);
-    }
-
-    else if (albumId) {
+    } else if (albumId) {
       const data = await xfetch.get(`albums/${albumId}/tracks`);
-      if ( data.hasOwnProperty('error') ) {
+      if (data.hasOwnProperty('error')) {
         window.location.href = window.location.origin;
       }
       queue = data.items.map(item => item.uri);
       play(device_id, queue);
-    }
-
-    else if (songId) {
+    } else if (songId) {
       queue = [`spotify:track:${songId}`];
       play(device_id, queue);
-    }
-
-    else if (queue) {
+    } else if (queue) {
       queue = JSON.parse(queue);
       play(device_id, queue);
     }
