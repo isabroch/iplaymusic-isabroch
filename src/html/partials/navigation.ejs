@@ -10,7 +10,7 @@
     <% } %>
 
 
-    <div class="search <% if (!search) { %>hidden<% } %>" data-search-is-open="true" data-search-results-showing="true">
+    <div class="search <% if (!search) { %>hidden<% } %>" data-search-is-open="false" data-search-results-showing="false">
       <div class="search__bar-hider">
         <input type="search" name="searchQuery" class="search__bar" placeholder="Search...">
       </div>
@@ -23,25 +23,17 @@
       <div class="search__result-list-container">
         <div class="search__result-list-background"></div>
         <ul class="search__result-list">
-          <li class="search__result">
-            <img src="http://placekitten.com/200/300" alt="" width="40" height="40" class="search__result-media"> <span class="search__result-title">A song name</span> <span class="search__result-detail">Song</span>
-            <a href="" class="search__result-link"></a>
-          </li>
-          <li class="search__result">
-            <img src="http://placekitten.com/200/300" alt="" width="40" height="40" class="search__result-media"> <span class="search__result-title">A song name</span> <span class="search__result-detail">Song</span>
-            <a href="" class="search__result-link"></a>
-          </li>
-        </ul>
 
-        <template id="search-result">
-          <li class="search__result">
-            <img src="" alt="" width="40" height="40" class="search__result-media"> <span class="search__result-title">A song name</span> <span class="search__result-detail">Song</span>
-            <a href="" class="search__result-link"></a>
-          </li>
-        </template>
+        </ul>
       </div>
     </div>
 
+    <template id="search-result">
+      <li class="search__result">
+        <img src="" data-lazysrc="" alt="" width="40" height="40" class="search__result-media"> <span class="search__result-title">A song name</span> <span class="search__result-detail">Song</span>
+        <a href="" class="search__result-link"></a>
+      </li>
+    </template>
   </div>
 
   <%# bottom bar navigation %>
