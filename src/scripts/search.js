@@ -60,7 +60,7 @@ const search = (async () => {
   })
 
   async function getResults(input) {
-    let data = await xfetch.get(`search?q=%22${input}%22&type=playlist,album,track,artist&limit=5`);
+    let data = await xfetch.get(`search?q=%22${input}%22&type=playlist,album,track&limit=5`);
 
     let resultsArray = [];
 
